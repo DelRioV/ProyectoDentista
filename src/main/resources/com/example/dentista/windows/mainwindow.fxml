@@ -36,7 +36,7 @@
       </ToolBar>
       <ImageView fx:id="imgLogo" fitHeight="131.0" fitWidth="132.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@static/img/logo_dent.jpg" />
+            <Image url="@../static/img/logo_dent.jpg" />
          </image>
       </ImageView>
       <ToolBar layoutX="477.0" prefHeight="59.0" prefWidth="163.0">
