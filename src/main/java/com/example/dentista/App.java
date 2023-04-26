@@ -9,9 +9,23 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Clase que contiene las acciones básicas del proyecto en javafx
+ *
+ * @author: Pablo Salvadro Del Río Vergara
+ * @version: 26/04/2023
+ */
 public class App extends Application {
 
+    //Campos de la clase
     private static Stage stage;
+
+    /**
+     * Clase que llama el método "Main" para empezar el programa
+     *
+     * @param stage
+     * @throws IOException -> En caso de que haya un fallo a la hora de cargar los archivos
+     */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("windows/mainwindow.fxml"));
@@ -23,12 +37,25 @@ public class App extends Application {
         stage.show();
         this.stage = stage;
     }
+
+    /**
+     * Clase que tiene como función cambiar la escena que se muestra
+     *
+     * @param fxml - La ruta donde se encuentra el archivo a cargar
+     * @throws IOException -> En caso de que haya un fallo a la hora de cargar los archivos
+     */
     public static void changeScene(String fxml) throws IOException {
         Parent pane = FXMLLoader.load(
                 App.class.getResource(fxml));
 
         stage.getScene().setRoot(pane);
     }
+
+    /**
+     * Primer método que ejecuta el inicio
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         launch();
     }
