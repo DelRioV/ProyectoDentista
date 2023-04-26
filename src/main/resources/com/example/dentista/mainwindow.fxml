@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dentista.controller.MainWindowController">
+   <children>
+      <ToolBar prefHeight="59.0" prefWidth="215.0">
+         <items>
+            <MenuButton fx:id="clienteButton" mnemonicParsing="false" text="Cliente">
+              <items>
+                <MenuItem fx:id="nuevoClienteButton" mnemonicParsing="false" text="Nuevo..." />
+                <MenuItem fx:id="modificarClienteButton" mnemonicParsing="false" text="Modificar..." />
+                  <MenuItem fx:id="eliminarClienteButton" mnemonicParsing="false" text="Eliminar..." />
+                  <MenuItem fx:id="mostrarClienteButton" mnemonicParsing="false" text="Mostrar..." />
+              </items>
+            </MenuButton>
+            <MenuButton fx:id="citaButton" mnemonicParsing="false" text="Cita">
+               <items>
+                  <MenuItem fx:id="nuevoCitaButton" mnemonicParsing="false" text="Nuevo..." />
+                  <MenuItem fx:id="modificarCitaButton" mnemonicParsing="false" text="Modificar..." />
+                  <MenuItem fx:id="eliminarCitaButton" mnemonicParsing="false" text="Eliminar..." />
+                  <MenuItem fx:id="mostrarCitaButton" mnemonicParsing="false" text="Mostrar..." />
+               </items>
+            </MenuButton>
+         </items>
+      </ToolBar>
+      <ImageView fx:id="imgLogo" fitHeight="131.0" fitWidth="132.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@static/img/logo_dent.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="fechaLabel" layoutX="454.0" layoutY="344.0" prefHeight="59.0" prefWidth="141.0" text="..." />
+   </children>
+</AnchorPane>
