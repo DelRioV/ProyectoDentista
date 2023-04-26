@@ -15,7 +15,7 @@
          <items>
             <MenuButton fx:id="clienteButton" mnemonicParsing="false" text="Cliente">
               <items>
-                <MenuItem fx:id="nuevoClienteButton" mnemonicParsing="false" text="Nuevo..." />
+                <MenuItem fx:id="nuevoClienteButton" mnemonicParsing="false" onAction="#prueba" text="Nuevo..." />
                 <MenuItem fx:id="modificarClienteButton" mnemonicParsing="false" text="Modificar..." />
                   <MenuItem fx:id="eliminarClienteButton" mnemonicParsing="false" text="Eliminar..." />
                   <MenuItem fx:id="mostrarClienteButton" mnemonicParsing="false" text="Mostrar..." />
