@@ -12,12 +12,12 @@
         <Label fx:id="telefonoLabel" layoutX="65.0" layoutY="207.0" text="Teléfono"/>
         <TextField fx:id="telefonoField" layoutX="65.0" layoutY="224.0" promptText="Escriba aquí..."/>
         <Label fx:id="fechaNaciLabel" layoutX="254.0" layoutY="91.0" text="Fecha de nacimiento"/>
-        <DatePicker fx:id="NacimientoDtPicker" layoutX="254.0" layoutY="113.0" promptText="Elija la fecha..."/>
+        <DatePicker fx:id="nacimientoDtPicker" layoutX="254.0" layoutY="113.0" promptText="Elija la fecha..."/>
         <Button fx:id="volverButton" layoutX="265.0" layoutY="190.0" mnemonicParsing="false" onAction="#volverMain"
                 text="Volver"/>
         <Button fx:id="guardarButton" layoutX="358.0" layoutY="190.0" mnemonicParsing="false" text="Guardar"/>
-        <ComboBox fx:id="clienteComboBox" layoutX="254.0" layoutY="32.0" prefHeight="25.0" prefWidth="174.0"
-                  promptText="- Seleccione un cliente -"/>
+        <ComboBox fx:id="clienteComboBox" layoutX="254.0" layoutY="32.0" onAction="#cargarCliente" prefHeight="25.0"
+                  prefWidth="174.0" promptText="- Seleccione un cliente -"/>
         <TextField fx:id="filterField" layoutX="62.0" layoutY="32.0" onInputMethodTextChanged="#filtrarCliente"
                    onKeyPressed="#filtrarCliente" onKeyReleased="#filtrarCliente" onKeyTyped="#filtrarCliente"
                    prefHeight="25.0" prefWidth="155.0" promptText="Filtrar"/>
