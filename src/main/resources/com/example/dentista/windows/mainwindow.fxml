@@ -10,13 +10,14 @@
       <ToolBar prefHeight="59.0" prefWidth="477.0">
          <items>
             <MenuButton fx:id="clienteButton" mnemonicParsing="false" text="Cliente">
-              <items>
-                <MenuItem fx:id="nuevoClienteButton" mnemonicParsing="false" onAction="#cambiarNuevoCliente"
-                          text="Nuevo..."/>
-                <MenuItem fx:id="modificarClienteButton" mnemonicParsing="false" text="Modificar..." />
-                  <MenuItem fx:id="eliminarClienteButton" mnemonicParsing="false" text="Eliminar..." />
-                  <MenuItem fx:id="mostrarClienteButton" mnemonicParsing="false" text="Mostrar..." />
-              </items>
+               <items>
+                  <MenuItem fx:id="nuevoClienteButton" mnemonicParsing="false" onAction="#cambiarNuevoCliente"
+                            text="Nuevo..."/>
+                  <MenuItem fx:id="modificarClienteButton" mnemonicParsing="false" onAction="#cambiarModCliente"
+                            text="Modificar..."/>
+                  <MenuItem fx:id="eliminarClienteButton" mnemonicParsing="false" text="Eliminar..."/>
+                  <MenuItem fx:id="mostrarClienteButton" mnemonicParsing="false" text="Mostrar..."/>
+               </items>
             </MenuButton>
             <MenuButton fx:id="citaButton" mnemonicParsing="false" text="Cita">
                <items>
