@@ -44,10 +44,12 @@ public class App extends Application {
      * @param fxml - La ruta donde se encuentra el archivo a cargar
      * @throws IOException -> En caso de que haya un fallo a la hora de cargar los archivos
      */
-    public static void changeScene(String fxml) throws IOException {
+    public static void changeScene(String fxml, int width, int heigth) throws IOException {
         Parent pane = FXMLLoader.load(
                 App.class.getResource(fxml));
-
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml));
+        Scene scene = new Scene(fxmlLoader.load(), width, heigth);
+        stage.setScene(scene);
         stage.getScene().setRoot(pane);
     }
 

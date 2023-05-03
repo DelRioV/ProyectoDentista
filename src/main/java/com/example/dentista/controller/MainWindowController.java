@@ -29,7 +29,8 @@ public class MainWindowController implements Initializable {
      */
     @FXML
     public void cambiarNuevoCliente() throws IOException {
-        App.changeScene("windows/nuevoclientewindow.fxml");
+        App.changeScene("windows/nuevoclientewindow.fxml", 490, 242);
+
     }
 
     /**
