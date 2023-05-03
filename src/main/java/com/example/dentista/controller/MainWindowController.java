@@ -35,7 +35,7 @@ public class MainWindowController implements Initializable {
 
     @FXML
     public void cambiarModCliente() throws IOException {
-        App.changeScene("windows/modificarclientewindow.fxml", 490, 242);
+        App.changeScene("windows/modificarclientewindow.fxml", 490, 280);
 
     }
 
