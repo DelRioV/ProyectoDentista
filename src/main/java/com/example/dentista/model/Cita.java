@@ -1,2 +1,4 @@
-package com.example.dentista.model;public class Cita {
+package com.example.dentista.model;
+
+public class Cita {
 }
