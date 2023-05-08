@@ -11,11 +11,11 @@
       <Label fx:id="nombreLabel" layoutX="74.0" layoutY="36.0" text="Nombre" />
       <TextField fx:id="nombreField" layoutX="77.0" layoutY="57.0" promptText="Escriba aquí..." />
       <Label fx:id="dniLabel" layoutX="75.0" layoutY="93.0" text="DNI" />
-      <TextField fx:id="dniField" layoutX="77.0" layoutY="110.0" promptText="Escriba aquí..." />
+      <TextField fx:id="dniField" layoutX="77.0" layoutY="110.0" onInputMethodTextChanged="#comprobarDni" onKeyPressed="#comprobarDni" onKeyReleased="#comprobarDni" onKeyTyped="#comprobarDni" promptText="Escriba aquí..." />
       <Label fx:id="telefonoLabel" layoutX="77.0" layoutY="148.0" text="Teléfono" />
-      <TextField fx:id="telefonoField" layoutX="77.0" layoutY="171.0" promptText="Escriba aquí..." />
+      <TextField fx:id="telefonoField" layoutX="77.0" layoutY="171.0" onInputMethodTextChanged="#comprobarTelefono" onKeyPressed="#comprobarTelefono" onKeyReleased="#comprobarTelefono" onKeyTyped="#comprobarTelefono" promptText="Escriba aquí..." />
       <Label fx:id="fechaNaciLabel" layoutX="266.0" layoutY="36.0" text="Fecha de nacimiento" />
-      <DatePicker fx:id="nacimientoDtPicker" layoutX="266.0" layoutY="58.0" promptText="Elija la fecha..." />
+      <DatePicker fx:id="nacimientoDtPicker" editable="false" layoutX="266.0" layoutY="58.0" promptText="Elija la fecha..." />
       <Button fx:id="volverButton" layoutX="277.0" layoutY="135.0" mnemonicParsing="false" onAction="#volverMain" text="Volver" />
       <Button fx:id="guardarButton" layoutX="370.0" layoutY="135.0" mnemonicParsing="false" onAction="#guardarCliente" text="Guardar" />
    </children>

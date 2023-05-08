@@ -23,19 +23,36 @@ public class NuevoClienteController {
     private TextField telefonoField;
     @FXML
     private DatePicker nacimientoDtPicker;
+
     @FXML
     public void volverMain() throws IOException {
         App.changeScene("windows/mainwindow.fxml", 620, 400);
     }
 
     @FXML
-    public void guardarCliente(){
-        Cliente cliente = new Cliente(nombreField.getText(),dniField.getText(),telefonoField.getText(),nacimientoDtPicker.getValue().toString());
-        boolean registrado = ClienteTable.nuevoCliente(cliente,new DataBaseConnection().getConnection());
-        if(registrado){
+    public void guardarCliente() throws IOException {
+        Cliente cliente = new Cliente(nombreField.getText(), dniField.getText(), telefonoField.getText(), nacimientoDtPicker.getValue().toString());
+        boolean registrado = ClienteTable.nuevoCliente(cliente, new DataBaseConnection().getConnection());
+        if (registrado) {
             System.out.printf("Registrado");
-        } else {
+            volverMain();
+            } else {
             System.out.printf("No registrado");
         }
     }
+
+    @FXML
+    public void comprobarDni() {
+        if (dniField.getText().length() > 9) {
+            dniField.setText(dniField.getText().substring(0, 9));
+        }
+    }
+
+    @FXML
+    public void comprobarTelefono(){
+        if (telefonoField.getText().length() > 9) {
+            telefonoField.setText(telefonoField.getText().substring(0, 9));
+        }
+    }
+
 }

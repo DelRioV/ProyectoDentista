@@ -5,6 +5,7 @@ import com.example.dentista.database.ClienteTable;
 import com.example.dentista.database.DataBaseConnection;
 import com.example.dentista.model.Cliente;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -65,14 +66,43 @@ public class ModificarClienteController {
 
     @FXML
     public void modificarCliente() throws IOException {
-        Cliente cliente = new Cliente(nombreField.getText(), dniField.getText(), telefonoField.getText(), nacimientoDtPicker.getValue().toString());
-        boolean modificado = ClienteTable.modificarCliente(cliente, new DataBaseConnection().getConnection(), clienteComboBox.getValue().toString());
-        if (modificado) {
-            System.out.printf("Modificado");
-            App.changeScene("windows/modificarclientewindow.fxml", 490, 280);
+        String abd = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
+        if(dniField.getText().length() != 9 || abd.indexOf(dniField.getText().substring(8,9)) == -1 || !dniField.getText().substring(0,8).matches("[0-9]+")) {
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setTitle("ERROR");
+            a.setContentText("Solo se admite 8 números y 1 letra al final en la casilla dni");
+            a.show();
+        } else{
+            if(telefonoField.getText().matches("[0-9]+") && telefonoField.getText().length() == 9){
+                Cliente cliente = new Cliente(nombreField.getText(), dniField.getText(), telefonoField.getText(), nacimientoDtPicker.getValue().toString());
+                boolean modificado = ClienteTable.modificarCliente(cliente, new DataBaseConnection().getConnection(), clienteComboBox.getValue().toString());
+                if (modificado) {
+                    System.out.printf("Modificado");
+                    App.changeScene("windows/modificarclientewindow.fxml", 490, 280);
 
-        } else {
-            System.out.printf("No modificado");
+                } else {
+                    System.out.printf("No modificado");
+                }
+            } else {
+                Alert a = new Alert(Alert.AlertType.ERROR);
+                a.setTitle("ERROR");
+                a.setContentText("Solo se adminten números en la casilla de teléfono");
+                a.show();
+            }
+        }
+    }
+
+    @FXML
+    public void comprobarDni() {
+        if (dniField.getText().length() > 9) {
+            dniField.setText(dniField.getText().substring(0, 9));
+        }
+    }
+
+    @FXML
+    public void comprobarTelefono(){
+        if (telefonoField.getText().length() > 9) {
+            telefonoField.setText(telefonoField.getText().substring(0, 9));
         }
     }
 }
