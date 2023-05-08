@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+
 <AnchorPane minHeight="400.0" minWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dentista.controller.MainWindowController">
    <children>
       <ToolBar prefHeight="59.0" prefWidth="477.0">
          <items>
             <MenuButton fx:id="clienteButton" mnemonicParsing="false" text="Cliente">
                <items>
-                  <MenuItem fx:id="nuevoClienteButton" mnemonicParsing="false" onAction="#cambiarNuevoCliente"
-                            text="Nuevo..."/>
-                  <MenuItem fx:id="modificarClienteButton" mnemonicParsing="false" onAction="#cambiarModCliente"
-                            text="Modificar..."/>
-                  <MenuItem fx:id="eliminarClienteButton" mnemonicParsing="false" text="Eliminar..."/>
-                  <MenuItem fx:id="mostrarClienteButton" mnemonicParsing="false" text="Mostrar..."/>
+                  <MenuItem fx:id="nuevoClienteButton" mnemonicParsing="false" onAction="#cambiarNuevoCliente" text="Nuevo..." />
+                  <MenuItem fx:id="modificarClienteButton" mnemonicParsing="false" onAction="#cambiarModCliente" text="Modificar..." />
+                  <MenuItem fx:id="eliminarClienteButton" mnemonicParsing="false" onAction="#cambiarElCliente" text="Eliminar..." />
+                  <MenuItem fx:id="mostrarClienteButton" mnemonicParsing="false" text="Mostrar..." />
                </items>
             </MenuButton>
             <MenuButton fx:id="citaButton" mnemonicParsing="false" text="Cita">

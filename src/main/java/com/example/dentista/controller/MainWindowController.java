@@ -39,6 +39,11 @@ public class MainWindowController implements Initializable {
 
     }
 
+    @FXML
+    public void cambiarElCliente() throws IOException {
+        App.changeScene("windows/eliminarclientewindow.fxml", 469, 130);
+
+    }
     /**
      * Método que se ejecuta al realizar la carga del archivo mainwindow.fxml
      *
