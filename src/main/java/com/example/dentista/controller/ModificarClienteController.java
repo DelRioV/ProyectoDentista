@@ -39,7 +39,7 @@ public class ModificarClienteController {
     @FXML
     public void filtrarCliente() {
         clienteComboBox.getItems().clear();
-        ArrayList<String> clientes = BuscarController.filtrarCliente(filterField.getText());
+        ArrayList<String> clientes = BuscarController.filtrarNombre(filterField.getText());
         for (int i = 0; i < clientes.size(); i++) {
             clienteComboBox.getItems().add(clientes.get(i));
         }

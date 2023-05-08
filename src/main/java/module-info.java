@@ -8,4 +8,5 @@ module com.example.dentista {
     exports com.example.dentista;
     exports com.example.dentista.controller;
     opens com.example.dentista.controller to javafx.fxml;
+    opens com.example.dentista.model to javafx.base;
 }

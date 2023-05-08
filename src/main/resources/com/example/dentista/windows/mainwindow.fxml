@@ -18,7 +18,7 @@
                   <MenuItem fx:id="nuevoClienteButton" mnemonicParsing="false" onAction="#cambiarNuevoCliente" text="Nuevo..." />
                   <MenuItem fx:id="modificarClienteButton" mnemonicParsing="false" onAction="#cambiarModCliente" text="Modificar..." />
                   <MenuItem fx:id="eliminarClienteButton" mnemonicParsing="false" onAction="#cambiarElCliente" text="Eliminar..." />
-                  <MenuItem fx:id="mostrarClienteButton" mnemonicParsing="false" text="Mostrar..." />
+                  <MenuItem fx:id="mostrarClienteButton" mnemonicParsing="false" onAction="#cambiarMostrarCliente" text="Mostrar..." />
                </items>
             </MenuButton>
             <MenuButton fx:id="citaButton" mnemonicParsing="false" text="Cita">
