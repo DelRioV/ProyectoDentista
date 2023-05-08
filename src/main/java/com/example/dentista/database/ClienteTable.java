@@ -40,4 +40,19 @@ public class ClienteTable {
         }
         return modificado;
     }
+
+    public static boolean eliminarCliente(Connection con, String nombre) {
+        boolean elimniado = false;
+        try {
+            Statement st = con.createStatement();
+            int updated = st.executeUpdate("DELETE FROM clientes WHERE nombre = '" + nombre + "';");
+            if (updated == 1) {
+                elimniado = true;
+            }
+            con.close();
+        } catch (Exception e) {
+
+        }
+        return elimniado;
+    }
 }

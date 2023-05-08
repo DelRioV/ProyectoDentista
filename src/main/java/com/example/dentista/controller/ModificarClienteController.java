@@ -66,8 +66,8 @@ public class ModificarClienteController {
     @FXML
     public void modificarCliente() throws IOException {
         Cliente cliente = new Cliente(nombreField.getText(), dniField.getText(), telefonoField.getText(), nacimientoDtPicker.getValue().toString());
-        boolean registrado = ClienteTable.modificarCliente(cliente, new DataBaseConnection().getConnection(), clienteComboBox.getValue().toString());
-        if (registrado) {
+        boolean modificado = ClienteTable.modificarCliente(cliente, new DataBaseConnection().getConnection(), clienteComboBox.getValue().toString());
+        if (modificado) {
             System.out.printf("Modificado");
             App.changeScene("windows/modificarclientewindow.fxml", 490, 280);
 
