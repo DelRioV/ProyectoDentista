@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="130.0" prefWidth="469.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dentista.controller.EliminarClienteController">
    <children>
-      <ComboBox fx:id="clienteComboBox" layoutX="244.0" layoutY="35.0" prefHeight="25.0" prefWidth="174.0" promptText="- Seleccione un cliente -" />
+      <ComboBox fx:id="clienteComboBox" layoutX="244.0" layoutY="35.0" onAction="#seleccionarCliente" prefHeight="25.0" prefWidth="174.0" promptText="- Seleccione un cliente -" />
       <TextField fx:id="filterField" layoutX="52.0" layoutY="35.0" onInputMethodTextChanged="#filtrarCliente" onKeyPressed="#filtrarCliente" onKeyReleased="#filtrarCliente" onKeyTyped="#filtrarCliente" prefHeight="25.0" prefWidth="155.0" promptText="Filtrar" />
       <Button fx:id="volverButton" layoutX="105.0" layoutY="81.0" mnemonicParsing="false" onAction="#volverMain" text="Volver" />
       <Button fx:id="eliminarButton" layoutX="302.0" layoutY="81.0" mnemonicParsing="false" onAction="#eliminarCliente" text="Eliminar" />

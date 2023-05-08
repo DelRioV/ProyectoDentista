@@ -33,12 +33,21 @@ public class EliminarClienteController {
 
     @FXML
     public void eliminarCliente() throws IOException {
-        boolean eliminado = ClienteTable.eliminarCliente(new DataBaseConnection().getConnection(), clienteComboBox.getValue().toString());
-        if (eliminado) {
-            System.out.printf("Eliminado");
-            App.changeScene("windows/eliminarclientewindow.fxml", 469, 130);
+        if(!clienteComboBox.getPromptText().toString().equals("- Seleccione un cliente -")) {
+            boolean eliminado = ClienteTable.eliminarCliente(new DataBaseConnection().getConnection(), clienteComboBox.getValue().toString());
+            if (eliminado) {
+                System.out.printf("Eliminado");
+                App.changeScene("windows/eliminarclientewindow.fxml", 469, 130);
+            } else {
+                System.out.printf("No eliminado");
+            }
         } else {
-            System.out.printf("No eliminado");
+            System.out.println("Rellene el cliente");
         }
+    }
+
+    @FXML
+    public void seleccionarCliente(){
+        clienteComboBox.setPromptText(clienteComboBox.getValue().toString());
     }
 }
