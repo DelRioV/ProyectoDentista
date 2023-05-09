@@ -50,6 +50,12 @@ public class MainWindowController implements Initializable {
         App.changeScene("windows/mostrarclientewindow.fxml", 600, 400);
 
     }
+
+    @FXML
+    public void cambiarNuevaCita() throws IOException {
+        App.changeScene("windows/nuevacitawindow.fxml", 493, 297);
+
+    }
     /**
      * Método que se ejecuta al realizar la carga del archivo mainwindow.fxml
      *
