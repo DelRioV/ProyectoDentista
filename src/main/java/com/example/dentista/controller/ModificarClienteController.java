@@ -5,16 +5,19 @@ import com.example.dentista.database.ClienteTable;
 import com.example.dentista.database.DataBaseConnection;
 import com.example.dentista.model.Cliente;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 /**
  * Clase que controla las acciones de la ventana modificarclientewindow.fxml
@@ -22,7 +25,7 @@ import java.util.ArrayList;
  * @author: Pablo Salvadro Del Río Vergara
  * @version: 03/05/2023
  */
-public class ModificarClienteController {
+public class ModificarClienteController implements Initializable {
 
     @FXML
     private TextField filterField;
@@ -44,6 +47,14 @@ public class ModificarClienteController {
      */
     public void volverMain() throws IOException {
         App.changeScene("windows/mainwindow.fxml", 620, 400);
+    }
+
+    /**
+     * Método de comprobación de selección de fecha de nacimiento
+     */
+    @FXML
+    public void seleccionarFecha() {
+        nacimientoDtPicker.setPromptText(nacimientoDtPicker.getValue().toString());
     }
 
     /**
@@ -88,29 +99,37 @@ public class ModificarClienteController {
      */
     @FXML
     public void modificarCliente() throws IOException {
-        String abd = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
-        if (dniField.getText().length() != 9 || abd.indexOf(dniField.getText().substring(8, 9)) == -1 || !dniField.getText().substring(0, 8).matches("[0-9]+")) {
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setTitle("ERROR");
-            a.setContentText("Solo se admite 8 números y 1 letra al final en la casilla dni");
-            a.show();
-        } else {
-            if (telefonoField.getText().matches("[0-9]+") && telefonoField.getText().length() == 9) {
-                Cliente cliente = new Cliente(nombreField.getText(), dniField.getText(), telefonoField.getText(), nacimientoDtPicker.getValue().toString());
-                boolean modificado = ClienteTable.modificarCliente(cliente, new DataBaseConnection().getConnection(), clienteComboBox.getValue().toString());
-                if (modificado) {
-                    System.out.printf("Modificado");
-                    App.changeScene("windows/modificarclientewindow.fxml", 490, 280);
+        if (!clienteComboBox.getPromptText().equals("- Seleccione un cliente -")) {
 
-                } else {
-                    System.out.printf("No modificado");
-                }
-            } else {
+            String abd = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
+            if (dniField.getText().length() != 9 || abd.indexOf(dniField.getText().substring(8, 9)) == -1 || !dniField.getText().substring(0, 8).matches("[0-9]+")) {
                 Alert a = new Alert(Alert.AlertType.ERROR);
                 a.setTitle("ERROR");
-                a.setContentText("Solo se adminten números en la casilla de teléfono");
+                a.setContentText("Solo se admite 8 números y 1 letra al final en la casilla dni");
                 a.show();
+            } else {
+                if (telefonoField.getText().matches("[0-9]+") && telefonoField.getText().length() == 9) {
+                    Cliente cliente = new Cliente(nombreField.getText(), dniField.getText(), telefonoField.getText(), nacimientoDtPicker.getValue().toString());
+                    boolean modificado = ClienteTable.modificarCliente(cliente, new DataBaseConnection().getConnection(), clienteComboBox.getValue().toString());
+                    if (modificado) {
+                        Alert a = new Alert(Alert.AlertType.INFORMATION);
+                        a.setTitle("INFORMACIÓN");
+                        a.setContentText("Cliente modificado con éxito");
+                        a.show();                        App.changeScene("windows/modificarclientewindow.fxml", 490, 280);
+
+                    }
+                } else {
+                    Alert a = new Alert(Alert.AlertType.ERROR);
+                    a.setTitle("ERROR");
+                    a.setContentText("Solo se adminten números en la casilla de teléfono");
+                    a.show();
+                }
             }
+        } else {
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setTitle("ERROR");
+            a.setContentText("Seleccione un cliente");
+            a.show();
         }
     }
 
@@ -140,5 +159,10 @@ public class ModificarClienteController {
             a.show();
             telefonoField.setText(telefonoField.getText().substring(0, 9));
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        filtrarCliente();
     }
 }

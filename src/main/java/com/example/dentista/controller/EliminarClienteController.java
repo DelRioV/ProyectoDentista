@@ -4,11 +4,15 @@ import com.example.dentista.App;
 import com.example.dentista.database.ClienteTable;
 import com.example.dentista.database.DataBaseConnection;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 /**
  * Clase que controla las acciones de la ventana eliminarclientewindow.fxml
@@ -16,7 +20,7 @@ import java.util.ArrayList;
  * @author: Pablo Salvadro Del Río Vergara
  * @version: 08/05/2023
  */
-public class EliminarClienteController {
+public class EliminarClienteController implements Initializable {
 
     @FXML
     private TextField filterField;
@@ -56,14 +60,16 @@ public class EliminarClienteController {
         if (!clienteComboBox.getPromptText().toString().equals("- Seleccione un cliente -")) {
             boolean eliminado = ClienteTable.eliminarCliente(new DataBaseConnection().getConnection(), clienteComboBox.getValue().toString());
             if (eliminado) {
-                System.out.printf("Eliminado");
-                App.changeScene("windows/eliminarclientewindow.fxml", 469, 130);
-            } else {
-                System.out.printf("No eliminado");
+                Alert a = new Alert(Alert.AlertType.INFORMATION);
+                a.setTitle("INFORMACIÓN");
+                a.setContentText("Cliente eliminado con éxito");
+                a.show();                App.changeScene("windows/eliminarclientewindow.fxml", 469, 130);
             }
         } else {
-            System.out.println("Rellene el cliente");
-        }
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setTitle("ERROR");
+            a.setContentText("Seleccione un cliente");
+            a.show();        }
     }
 
     /**
@@ -72,5 +78,9 @@ public class EliminarClienteController {
     @FXML
     public void seleccionarCliente() {
         clienteComboBox.setPromptText(clienteComboBox.getValue().toString());
+    }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        filtrarCliente();
     }
 }

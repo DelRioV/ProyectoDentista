@@ -80,7 +80,7 @@ public class MostrarClientesController implements Initializable {
         TableColumn<Cliente, String> column4 =
                 new TableColumn<>("Fecha de nacimiento");
 
-        column4.setPrefWidth(260);
+        column4.setPrefWidth(249);
 
         column4.setCellValueFactory(
                 new PropertyValueFactory<>("fechaNacimiento"));

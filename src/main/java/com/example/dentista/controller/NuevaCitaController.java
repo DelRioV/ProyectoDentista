@@ -114,34 +114,39 @@ public class NuevaCitaController implements Initializable {
 
     /**
      * Método que se encarga de registrar la cita en la tabla "citas"
+     *
+     * @throws IOException
      */
     @FXML
-    public void guardarCita() {
-        if (comprobarDisponibilidad()) {
-            if (comprobarDuracion()) {
-                Cita cita = new Cita(fechaCitaDtPicker.getValue(),
-                        BuscarController.filtrarCliente(nombreSeleccionado).get(0).getDni(),
-                        descripcionTextArea.getText(), horaComboBox.getValue().toString(),
-                        Integer.parseInt(duracionField.getText()));
-                if (CitaTable.nuevaCita(cita, new DataBaseConnection().getConnection())) {
-                    Alert a = new Alert(Alert.AlertType.INFORMATION);
-                    a.setTitle("REGISTRADO");
-                    a.setContentText("SE HA CONFIRMADO EL REGISTRO DE SU CITA");
+    public void guardarCita() throws IOException {
+        if (!clienteComboBox.getPromptText().toString().equals("- Seleccione un cliente -") && !horaComboBox.getPromptText().toString().equals("- Hora de la cita -") && !fechaCitaDtPicker.getPromptText().equals("Elija la fecha...")) {
+            if (comprobarDisponibilidad()) {
+                if (comprobarDuracion()) {
+                    Cita cita = new Cita(fechaCitaDtPicker.getValue(),
+                            BuscarController.filtrarCliente(nombreSeleccionado).get(0).getDni(),
+                            descripcionTextArea.getText(), horaComboBox.getValue().toString(),
+                            Integer.parseInt(duracionField.getText()));
+                    if (CitaTable.nuevaCita(cita, new DataBaseConnection().getConnection())) {
+                        Alert a = new Alert(Alert.AlertType.INFORMATION);
+                        a.setTitle("REGISTRADO");
+                        a.setContentText("SE HA CONFIRMADO EL REGISTRO DE SU CITA");
+                        a.show();
+                        App.changeScene("windows/nuevacitawindow.fxml", 493, 297);
+                    }
+                } else {
+                    Alert a = new Alert(Alert.AlertType.ERROR);
+                    a.setTitle("ERROR");
+                    a.setContentText("Solo se pueden introducir dos dígitos numéricos");
                     a.show();
                 }
             } else {
                 Alert a = new Alert(Alert.AlertType.ERROR);
                 a.setTitle("ERROR");
-                a.setContentText("Solo se pueden introducir dos dígitos numéricos");
+                a.setContentText("Ya existe una cita durante las fechas señaladas");
                 a.show();
             }
-        } else {
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setTitle("ERROR");
-            a.setContentText("Ya existe una cita durante las fechas señaladas");
-            a.show();
-        }
 
+        }
     }
 
     /**
@@ -158,6 +163,14 @@ public class NuevaCitaController implements Initializable {
     @FXML
     public void seleccionarHora() {
         horaComboBox.setPromptText(horaComboBox.getValue().toString());
+    }
+
+    /**
+     * Método de comprobación de selección de hora
+     */
+    @FXML
+    public void seleccionarFecha() {
+        fechaCitaDtPicker.setPromptText(fechaCitaDtPicker.getValue().toString());
     }
 
     /**

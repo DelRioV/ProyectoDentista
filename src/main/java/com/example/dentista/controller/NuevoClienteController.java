@@ -42,35 +42,51 @@ public class NuevoClienteController {
     }
 
     /**
+     * Método de comprobación de selección de fecha de nacimiento
+     */
+    @FXML
+    public void seleccionarFecha() {
+        nacimientoDtPicker.setPromptText(nacimientoDtPicker.getValue().toString());
+    }
+
+    /**
      * Método que se encarga de realizar la inserción de datos en la tabla "clientes"
      *
      * @throws IOException
      */
     @FXML
     public void guardarCliente() throws IOException {
-        String abd = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
-        if (dniField.getText().length() != 9 || abd.indexOf(dniField.getText().substring(8, 9)) == -1 || !dniField.getText().substring(0, 8).matches("[0-9]+")) {
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setTitle("ERROR");
-            a.setContentText("Solo se admite 8 números y 1 letra al final en la casilla dni");
-            a.show();
-        } else {
-            if (telefonoField.getText().matches("[0-9]+") && telefonoField.getText().length() == 9) {
-                Cliente cliente = new Cliente(nombreField.getText(), dniField.getText(), telefonoField.getText(), nacimientoDtPicker.getValue().toString());
-                boolean registrado = ClienteTable.nuevoCliente(cliente, new DataBaseConnection().getConnection());
-                if (registrado) {
-                    System.out.printf("Registrado");
-                    volverMain();
-                } else {
-                    System.out.printf("No registrado");
-                }
-            } else {
+        if (!nacimientoDtPicker.getPromptText().equals("Elija la fecha...")) {
+            String abd = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
+            if (dniField.getText().length() != 9 || abd.indexOf(dniField.getText().substring(8, 9)) == -1 || !dniField.getText().substring(0, 8).matches("[0-9]+")) {
                 Alert a = new Alert(Alert.AlertType.ERROR);
                 a.setTitle("ERROR");
-                a.setContentText("Solo se adminten números en la casilla de teléfono");
+                a.setContentText("Solo se admite 8 números y 1 letra al final en la casilla dni");
                 a.show();
-            }
+            } else {
+                if (telefonoField.getText().matches("[0-9]+") && telefonoField.getText().length() == 9) {
+                    Cliente cliente = new Cliente(nombreField.getText(), dniField.getText(), telefonoField.getText(), nacimientoDtPicker.getValue().toString());
+                    boolean registrado = ClienteTable.nuevoCliente(cliente, new DataBaseConnection().getConnection());
+                    if (registrado) {
+                        Alert a = new Alert(Alert.AlertType.INFORMATION);
+                        a.setTitle("INFORMACIÓN");
+                        a.setContentText("Cliente registrado con éxito");
+                        a.show();
+                        volverMain();
+                    }
+                } else {
+                    Alert a = new Alert(Alert.AlertType.ERROR);
+                    a.setTitle("ERROR");
+                    a.setContentText("Solo se adminten números en la casilla de teléfono");
+                    a.show();
+                }
 
+            }
+        } else {
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setTitle("ERROR");
+            a.setContentText("Seleccione una fecha");
+            a.show();
         }
     }
 
