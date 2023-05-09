@@ -16,7 +16,7 @@
             <Label fx:id="clienteLabel" layoutX="68.0" layoutY="77.0" text="Cliente" />
             <Label fx:id="horaLabel" layoutX="60.0" layoutY="139.0" text="Hora" />
             <Label fx:id="duracionLabel" layoutX="60.0" layoutY="191.0" text="Duración" />
-            <TextField fx:id="duracionField" layoutX="51.0" layoutY="212.0" prefHeight="25.0" prefWidth="176.0" promptText="Escriba aquí (en minutos)..." />
+            <TextField fx:id="duracionField" layoutX="51.0" layoutY="212.0" prefHeight="25.0" prefWidth="176.0" promptText="Escriba aquí (en minutos)..." text="0" />
             <Label fx:id="fechaCitaLabel" layoutX="265.0" layoutY="77.0" text="Fecha de la cita" />
             <DatePicker fx:id="fechaCitaDtPicker" editable="false" layoutX="265.0" layoutY="99.0" promptText="Elija la fecha..." />
             <Button fx:id="volverButton" layoutX="277.0" layoutY="212.0" mnemonicParsing="false" onAction="#volverMain" text="Volver" />
