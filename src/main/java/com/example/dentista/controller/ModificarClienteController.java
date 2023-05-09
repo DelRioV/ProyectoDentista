@@ -16,11 +16,16 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+/**
+ * Clase que controla las acciones de la ventana modificarclientewindow.fxml
+ *
+ * @author: Pablo Salvadro Del Río Vergara
+ * @version: 03/05/2023
+ */
 public class ModificarClienteController {
 
     @FXML
     private TextField filterField;
-
     @FXML
     private ComboBox clienteComboBox;
     @FXML
@@ -32,10 +37,19 @@ public class ModificarClienteController {
     @FXML
     private DatePicker nacimientoDtPicker;
 
+    /**
+     * Método que permite volver a la ventana principal
+     *
+     * @throws IOException
+     */
     public void volverMain() throws IOException {
         App.changeScene("windows/mainwindow.fxml", 620, 400);
     }
 
+    /**
+     * Método que se aplica cada vez que ocurre un cambio en el componente "filterField",
+     * que va rellenando el combo box con los datos recibidos del método BuscarController.filtrarNombre()
+     */
     @FXML
     public void filtrarCliente() {
         clienteComboBox.getItems().clear();
@@ -45,6 +59,9 @@ public class ModificarClienteController {
         }
     }
 
+    /**
+     * Método que se aplica al escoger una opción del "clienteComboBox", que rellena los datos del cliente en los campos correspondientes
+     */
     @FXML
     public void cargarCliente() {
         String cliente = clienteComboBox.getValue().toString();
@@ -64,16 +81,21 @@ public class ModificarClienteController {
         }
     }
 
+    /**
+     * Método que se aplica al pulsar el botón de "Guardar", se encarga de guardar los datos del cliente actualizados
+     *
+     * @throws IOException
+     */
     @FXML
     public void modificarCliente() throws IOException {
         String abd = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
-        if(dniField.getText().length() != 9 || abd.indexOf(dniField.getText().substring(8,9)) == -1 || !dniField.getText().substring(0,8).matches("[0-9]+")) {
+        if (dniField.getText().length() != 9 || abd.indexOf(dniField.getText().substring(8, 9)) == -1 || !dniField.getText().substring(0, 8).matches("[0-9]+")) {
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setTitle("ERROR");
             a.setContentText("Solo se admite 8 números y 1 letra al final en la casilla dni");
             a.show();
-        } else{
-            if(telefonoField.getText().matches("[0-9]+") && telefonoField.getText().length() == 9){
+        } else {
+            if (telefonoField.getText().matches("[0-9]+") && telefonoField.getText().length() == 9) {
                 Cliente cliente = new Cliente(nombreField.getText(), dniField.getText(), telefonoField.getText(), nacimientoDtPicker.getValue().toString());
                 boolean modificado = ClienteTable.modificarCliente(cliente, new DataBaseConnection().getConnection(), clienteComboBox.getValue().toString());
                 if (modificado) {
@@ -92,6 +114,9 @@ public class ModificarClienteController {
         }
     }
 
+    /**
+     * Método que comprueba si el dni se ha introducido de manera correcta o no
+     */
     @FXML
     public void comprobarDni() {
         if (dniField.getText().length() > 9) {
@@ -103,8 +128,11 @@ public class ModificarClienteController {
         }
     }
 
+    /**
+     * Método que comprueba que el número de teléfono tenga 9 números
+     */
     @FXML
-    public void comprobarTelefono(){
+    public void comprobarTelefono() {
         if (telefonoField.getText().length() > 9) {
             Alert a = new Alert(Alert.AlertType.INFORMATION);
             a.setTitle("INFORMACIÓN");

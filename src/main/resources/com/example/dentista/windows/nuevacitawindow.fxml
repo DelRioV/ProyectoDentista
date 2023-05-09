@@ -25,7 +25,7 @@
             <TextArea fx:id="descripcionTextArea" layoutX="263.0" layoutY="153.0" prefHeight="46.0" prefWidth="176.0" promptText="Escriba aqui..." />
             <TextField fx:id="filterField" layoutX="151.0" layoutY="34.0" onInputMethodTextChanged="#filtrarCliente" onKeyPressed="#filtrarCliente" onKeyReleased="#filtrarCliente" onKeyTyped="#filtrarCliente" prefHeight="25.0" prefWidth="287.0" promptText="Filtrar..." />
             <ComboBox fx:id="clienteComboBox" layoutX="52.0" layoutY="99.0" onAction="#tomarNombre" prefHeight="25.0" prefWidth="176.0" promptText="- Seleccione un cliente -" />
-            <ComboBox fx:id="horaComboBox" layoutX="52.0" layoutY="164.0" prefHeight="25.0" prefWidth="176.0" promptText="- Hora de la cita -" />
+            <ComboBox fx:id="horaComboBox" layoutX="52.0" layoutY="164.0" onAction="#seleccionarHora" prefHeight="25.0" prefWidth="176.0" promptText="- Hora de la cita -" />
          </children>
       </AnchorPane>
    </children>

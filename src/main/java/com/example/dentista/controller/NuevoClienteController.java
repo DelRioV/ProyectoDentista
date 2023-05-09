@@ -14,6 +14,12 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 
+/**
+ * Clase que controla las acciones de la ventana nuevoclientewindow.fxml
+ *
+ * @author: Pablo Salvador Del Río Vergara
+ * @version: 26/04/2023
+ */
 public class NuevoClienteController {
 
     @FXML
@@ -25,11 +31,21 @@ public class NuevoClienteController {
     @FXML
     private DatePicker nacimientoDtPicker;
 
+    /**
+     * Método que permite volver a la ventana principal
+     *
+     * @throws IOException
+     */
     @FXML
     public void volverMain() throws IOException {
         App.changeScene("windows/mainwindow.fxml", 620, 400);
     }
 
+    /**
+     * Método que se encarga de realizar la inserción de datos en la tabla "clientes"
+     *
+     * @throws IOException
+     */
     @FXML
     public void guardarCliente() throws IOException {
         String abd = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
@@ -57,26 +73,33 @@ public class NuevoClienteController {
 
         }
     }
-        @FXML
-        public void comprobarDni () {
-            if (dniField.getText().length() > 9) {
-                Alert a = new Alert(Alert.AlertType.INFORMATION);
-                a.setTitle("INFORMACIÓN");
-                a.setContentText("Logitud máxima: 9");
-                a.show();
-                dniField.setText(dniField.getText().substring(0, 9));
-            }
-        }
 
-        @FXML
-        public void comprobarTelefono () {
-            if (telefonoField.getText().length() > 9) {
-                Alert a = new Alert(Alert.AlertType.INFORMATION);
-                a.setTitle("INFORMACIÓN");
-                a.setContentText("Logitud máxima: 9");
-                a.show();
-                telefonoField.setText(telefonoField.getText().substring(0, 9));
-            }
+    /**
+     * Método que se encarga de comprobar si el dni se ha introducido de manera correcta
+     */
+    @FXML
+    public void comprobarDni() {
+        if (dniField.getText().length() > 9) {
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setTitle("INFORMACIÓN");
+            a.setContentText("Logitud máxima: 9");
+            a.show();
+            dniField.setText(dniField.getText().substring(0, 9));
         }
-
     }
+
+    /**
+     * Método que se encarga de comprobar si el número de teléfono se ha introducido de manera correcta
+     */
+    @FXML
+    public void comprobarTelefono() {
+        if (telefonoField.getText().length() > 9) {
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setTitle("INFORMACIÓN");
+            a.setContentText("Logitud máxima: 9");
+            a.show();
+            telefonoField.setText(telefonoField.getText().substring(0, 9));
+        }
+    }
+
+}

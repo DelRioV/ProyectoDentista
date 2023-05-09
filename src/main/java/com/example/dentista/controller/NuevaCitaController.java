@@ -14,6 +14,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Clase que controla las acciones de la ventana nuevacitawindow.fxml
+ *
+ * @author: Pablo Salvador Del Río Vergara
+ * @version: 09/05/2023
+ */
 public class NuevaCitaController implements Initializable {
 
     @FXML
@@ -30,11 +36,20 @@ public class NuevaCitaController implements Initializable {
     private TextArea descripcionTextArea;
     private String nombreSeleccionado;
 
+    /**
+     * Método que permite volver a la ventana principal
+     *
+     * @throws IOException
+     */
     @FXML
     public void volverMain() throws IOException {
         App.changeScene("windows/mainwindow.fxml", 620, 400);
     }
 
+    /**
+     * Método que se aplica cada vez que ocurre un cambio en el componente "filterField",
+     * que va rellenando el combo box con los datos recibidos del método BuscarController.filtrarNombre()
+     */
     @FXML
     public void filtrarCliente() {
         clienteComboBox.getItems().clear();
@@ -44,11 +59,21 @@ public class NuevaCitaController implements Initializable {
         }
     }
 
+    /**
+     * Método que toma el nombre del cliente elegido al seleccionarlo en "clienteComboBox"
+     */
     @FXML
     public void tomarNombre() {
         nombreSeleccionado = clienteComboBox.getValue().toString();
+        seleccionarCliente();
     }
 
+    /**
+     * Método que comprueba si la duración introducida es correcta
+     *
+     * @return boolean -> true - si es correcta
+     * -> false - si no es correcta
+     */
     @FXML
     public boolean comprobarDuracion() {
         boolean comprobado = false;
@@ -58,6 +83,12 @@ public class NuevaCitaController implements Initializable {
         return comprobado;
     }
 
+    /**
+     * Método que comprueba si es posible registrar la cita para la hora determinada con la duración estimada
+     *
+     * @return -> true - si es correcta
+     * -> false - si no es correcta
+     */
     @FXML
     public boolean comprobarDisponibilidad() {
         boolean disponible = true;
@@ -81,6 +112,9 @@ public class NuevaCitaController implements Initializable {
         return disponible;
     }
 
+    /**
+     * Método que se encarga de registrar la cita en la tabla "citas"
+     */
     @FXML
     public void guardarCita() {
         if (comprobarDisponibilidad()) {
@@ -110,6 +144,28 @@ public class NuevaCitaController implements Initializable {
 
     }
 
+    /**
+     * Método de comprobación de selección de cliente
+     */
+    @FXML
+    public void seleccionarCliente() {
+        clienteComboBox.setPromptText(clienteComboBox.getValue().toString());
+    }
+
+    /**
+     * Método de comprobación de selección de hora
+     */
+    @FXML
+    public void seleccionarHora() {
+        horaComboBox.setPromptText(horaComboBox.getValue().toString());
+    }
+
+    /**
+     * Método que se realiza al cargar la ventana y carga las horas en su comboBox
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {

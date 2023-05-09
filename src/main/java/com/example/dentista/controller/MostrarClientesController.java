@@ -14,12 +14,21 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Clase que controla las acciones de la ventana mostrarclientewindow.fxml
+ *
+ * @author: Pablo Salvadro Del Río Vergara
+ * @version: 08/05/2023
+ */
 public class MostrarClientesController implements Initializable {
     @FXML
     private TextField filterField;
     @FXML
     private TableView tableView;
 
+    /**
+     * Método que rellena la tabla conforme se van filtrando los clientes
+     */
     @FXML
     public void filtrarCliente() {
         tableView.getItems().clear();
@@ -30,11 +39,22 @@ public class MostrarClientesController implements Initializable {
         tableView.refresh();
     }
 
+    /**
+     * Método que permite volver a la ventana principal
+     *
+     * @throws IOException
+     */
     @FXML
     public void volverMain() throws IOException {
         App.changeScene("windows/mainwindow.fxml", 620, 400);
     }
 
+    /**
+     * Método que se realiza al cargar la ventana, se encarga de añadir las columnas a la tabla donde se van a mostrar los clientes
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -69,6 +89,6 @@ public class MostrarClientesController implements Initializable {
         tableView.getColumns().add(column2);
         tableView.getColumns().add(column3);
         tableView.getColumns().add(column4);
-         filtrarCliente();
+        filtrarCliente();
     }
 }
