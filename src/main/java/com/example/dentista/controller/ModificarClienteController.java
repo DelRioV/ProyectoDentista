@@ -75,6 +75,7 @@ public class ModificarClienteController implements Initializable {
      */
     @FXML
     public void cargarCliente() {
+        clienteComboBox.setPromptText(clienteComboBox.getValue().toString());
         String cliente = clienteComboBox.getValue().toString();
         Connection connection = new DataBaseConnection().getConnection();
         try {
