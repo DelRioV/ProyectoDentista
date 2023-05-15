@@ -118,7 +118,7 @@ public class ModificarCitaController implements Initializable {
         if (!clienteComboBox.getPromptText().toString().equals("- Seleccione un cliente -") && !horaComboBox.getPromptText().toString().equals("- Hora de la cita -") && !fechaCitaDtPicker.getPromptText().equals("Elija la fecha...")) {
             if (comprobarDisponibilidad()) {
                 Cita cita = new Cita(fechaCitaDtPicker.getValue(), dni,
-                        descripcionTextArea.getText(), horaComboBox.getValue().toString().replace(":", ""),
+                        descripcionTextArea.getText(), horaComboBox.getValue().toString(),
                         horafinCBox.getValue().toString());
                 if (CitaTable.modificarCita(cita, new DataBaseConnection().getConnection(), clienteComboBox.getValue().toString())) {
                     Alert a = new Alert(Alert.AlertType.INFORMATION);
