@@ -31,7 +31,7 @@ public class CitaTable {
         ArrayList<String> fechashoras = new ArrayList<>();
         try {
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("SELECT hora,duracion_min FROM citas WHERE fecha_cita = '" + fecha + "' " +
+            ResultSet rs = st.executeQuery("SELECT hora_inicio,hora_fin FROM citas WHERE fecha_cita = '" + fecha + "' " +
                     "AND dni_cliente <> (SELECT dni FROM clientes WHERE nombre = '" + nombre + "')");
             while (rs.next()) {
                 fechashoras.add(rs.getString(1));
@@ -80,11 +80,10 @@ public class CitaTable {
         boolean modificado = false;
         try {
             Statement st = con.createStatement();
-
             int updated = st.executeUpdate("UPDATE citas SET fecha_cita = '" + cita.getFechaCita() + "',dni_cliente = '"
-                    + cita.getDniCliente() + "',descripcion = '" + cita.getDescripcion() + "',hora = '"
-                    + cita.getHoraInicio() + "',duracion_min = " + cita.getHoraFin() +
-                    " WHERE dni_cliente = (SELECT dni FROM clientes WHERE nombre = '" + nombreOriginal + "') ;");
+                    + cita.getDniCliente() + "',descripcion = '" + cita.getDescripcion() + "',hora_inicio = '"
+                    + cita.getHoraInicio() + "',hora_fin = '" + cita.getHoraFin() +
+                    "' WHERE dni_cliente = (SELECT dni FROM clientes WHERE nombre = '" + nombreOriginal + "') ;");
             if (updated == 1) {
                 modificado = true;
             }

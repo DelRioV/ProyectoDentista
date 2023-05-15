@@ -135,6 +135,7 @@ public class ModificarCitaController implements Initializable {
             }
         }
     }
+
     /**
      * Método de comprobación de selección de hora de fin
      */
@@ -142,6 +143,7 @@ public class ModificarCitaController implements Initializable {
     public void seleccionarHoraFin() {
         horafinCBox.setPromptText(horafinCBox.getValue().toString());
     }
+
     /**
      * Método que comprueba si es posible registrar la cita para la hora determinada con la duración estimada
      *
@@ -151,22 +153,20 @@ public class ModificarCitaController implements Initializable {
     @FXML
     public boolean comprobarDisponibilidad() throws ParseException {
         boolean disponible = true;
-        ArrayList<String> fechasHoras = CitaTable.sacarFechasHoras(fechaCitaDtPicker.getValue(), new DataBaseConnection().getConnection(),clienteComboBox.getValue().toString());
-        System.out.println(fechasHoras);
+        ArrayList<String> fechasHoras = CitaTable.sacarFechasHoras(fechaCitaDtPicker.getValue(), new DataBaseConnection().getConnection(), clienteComboBox.getValue().toString());
         for (int i = 0; i < fechasHoras.size(); i = i + 2) {
             Date inicioGuardado = new SimpleDateFormat("HH:mm").parse(fechasHoras.get(i));
             Date finalGuardado = new SimpleDateFormat("HH:mm").parse(fechasHoras.get(i + 1));
             Date inicioCita = new SimpleDateFormat("HH:mm").parse(horaComboBox.getValue().toString());
             Date finalCita = new SimpleDateFormat("HH:mm").parse(horafinCBox.getValue().toString());
 
-            if(finalCita.after(finalGuardado) && inicioCita.before(inicioGuardado)
+            if (finalCita.after(finalGuardado) && inicioCita.before(inicioGuardado)
                     || inicioCita.before(finalGuardado) && finalCita.after(finalGuardado)
                     || inicioCita.before(inicioGuardado) && finalCita.before(finalGuardado)
-                    || inicioCita.equals(inicioGuardado)){
+                    || inicioCita.equals(inicioGuardado)) {
                 disponible = false;
             }
         }
-        System.out.println(disponible);
         return disponible;
     }
 
