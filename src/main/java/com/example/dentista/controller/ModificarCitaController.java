@@ -15,9 +15,12 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 /**
@@ -41,7 +44,7 @@ public class ModificarCitaController implements Initializable {
     @FXML
     private TextArea descripcionTextArea;
     @FXML
-    private TextField duracionField;
+    private ComboBox horafinCBox;
     private String dni;
 
     /**
@@ -101,7 +104,7 @@ public class ModificarCitaController implements Initializable {
                 descripcionTextArea.setText(rs.getString(3));
                 horaComboBox.setValue(rs.getString(4).substring(0, 2) + ":" + rs.getString(4).substring(2));
                 horaComboBox.setPromptText(rs.getString(4));
-                duracionField.setText(rs.getString(5));
+                horafinCBox.setValue(rs.getString(5));
             }
             con.close();
         } catch (Exception e) {
@@ -111,12 +114,12 @@ public class ModificarCitaController implements Initializable {
     }
 
     @FXML
-    public void modificarCita() throws IOException {
+    public void modificarCita() throws IOException, ParseException {
         if (!clienteComboBox.getPromptText().toString().equals("- Seleccione un cliente -") && !horaComboBox.getPromptText().toString().equals("- Hora de la cita -") && !fechaCitaDtPicker.getPromptText().equals("Elija la fecha...")) {
             if (comprobarDisponibilidad()) {
                 Cita cita = new Cita(fechaCitaDtPicker.getValue(), dni,
                         descripcionTextArea.getText(), horaComboBox.getValue().toString().replace(":", ""),
-                        Integer.parseInt(duracionField.getText()));
+                        horafinCBox.getValue().toString());
                 if (CitaTable.modificarCita(cita, new DataBaseConnection().getConnection(), clienteComboBox.getValue().toString())) {
                     Alert a = new Alert(Alert.AlertType.INFORMATION);
                     a.setTitle("¡HECHO!");
@@ -132,7 +135,13 @@ public class ModificarCitaController implements Initializable {
             }
         }
     }
-
+    /**
+     * Método de comprobación de selección de hora de fin
+     */
+    @FXML
+    public void seleccionarHoraFin() {
+        horafinCBox.setPromptText(horafinCBox.getValue().toString());
+    }
     /**
      * Método que comprueba si es posible registrar la cita para la hora determinada con la duración estimada
      *
@@ -140,21 +149,20 @@ public class ModificarCitaController implements Initializable {
      * -> false - si no es correcta
      */
     @FXML
-    public boolean comprobarDisponibilidad() {
+    public boolean comprobarDisponibilidad() throws ParseException {
         boolean disponible = true;
-        ArrayList<String> fechasHoras = CitaTable.sacarFechasHoras(fechaCitaDtPicker.getValue(), new DataBaseConnection().getConnection(), clienteComboBox.getValue().toString());
+        ArrayList<String> fechasHoras = CitaTable.sacarFechasHoras(fechaCitaDtPicker.getValue(), new DataBaseConnection().getConnection(),clienteComboBox.getValue().toString());
         System.out.println(fechasHoras);
         for (int i = 0; i < fechasHoras.size(); i = i + 2) {
-            int duracionfield1 = (Integer.parseInt(duracionField.getText()) + (Integer.parseInt(fechasHoras.get(i))));
-            int duracionfield2 = (Integer.parseInt(duracionField.getText()) + (Integer.parseInt(fechasHoras.get(i + 1))));
-            while (duracionfield2 >= 60) {
-                duracionfield1 = Integer.parseInt(String.valueOf(duracionfield1).substring(0, 2)) * 100 + 100;
-                duracionfield2 = duracionfield2 - 60;
-            }
+            Date inicioGuardado = new SimpleDateFormat("HH:mm").parse(fechasHoras.get(i));
+            Date finalGuardado = new SimpleDateFormat("HH:mm").parse(fechasHoras.get(i + 1));
+            Date inicioCita = new SimpleDateFormat("HH:mm").parse(horaComboBox.getValue().toString());
+            Date finalCita = new SimpleDateFormat("HH:mm").parse(horafinCBox.getValue().toString());
 
-            System.out.println(duracionfield1 + " - " + duracionfield2);
-            if (Integer.parseInt(horaComboBox.getValue().toString().replace(":", "")) <= duracionfield1
-                    && Integer.parseInt(horaComboBox.getValue().toString().replace(":", "")) + Integer.parseInt(duracionField.getText()) > duracionfield2 + duracionfield1) {
+            if(finalCita.after(finalGuardado) && inicioCita.before(inicioGuardado)
+                    || inicioCita.before(finalGuardado) && finalCita.after(finalGuardado)
+                    || inicioCita.before(inicioGuardado) && finalCita.before(finalGuardado)
+                    || inicioCita.equals(inicioGuardado)){
                 disponible = false;
             }
         }
@@ -193,6 +201,8 @@ public class ModificarCitaController implements Initializable {
         for (int i = 16; i < 21; i++) {
             horaComboBox.getItems().add(i + ":00");
             horaComboBox.getItems().add(i + ":30");
+            horafinCBox.getItems().add(i + ":00");
+            horafinCBox.getItems().add(i + ":30");
         }
     }
 }

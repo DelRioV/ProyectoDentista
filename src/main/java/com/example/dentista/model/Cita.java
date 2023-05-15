@@ -6,15 +6,15 @@ public class Cita {
     private LocalDate fechaCita;
     private String dniCliente;
     private String descripcion;
-    private String hora;
-    private int duracionMin;
+    private String horaInicio;
+    private String horaFin;
 
-    public Cita(LocalDate fechaCita, String dniCliente, String descripcion, String hora, int duracionMin) {
+    public Cita(LocalDate fechaCita, String dniCliente, String descripcion, String horaInicio, String horaFin) {
         this.setFechaCita(fechaCita);
         this.setDniCliente(dniCliente);
         this.setDescripcion(descripcion);
-        this.setHora(hora);
-        this.setDuracionMin(duracionMin);
+        this.setHoraInicio(horaInicio);
+        this.setHoraFin(horaFin);
     }
 
     public LocalDate getFechaCita() {
@@ -41,19 +41,19 @@ public class Cita {
         this.descripcion = descripcion;
     }
 
-    public String getHora() {
-        return hora;
+    public String getHoraInicio() {
+        return horaInicio;
     }
 
-    public void setHora(String hora) {
-        this.hora = hora;
+    public void setHoraInicio(String horaInicio) {
+        this.horaInicio = horaInicio;
     }
 
-    public int getDuracionMin() {
-        return duracionMin;
+    public String getHoraFin() {
+        return horaFin;
     }
 
-    public void setDuracionMin(int duracionMin) {
-        this.duracionMin = duracionMin;
+    public void setHoraFin(String horaFin) {
+        this.horaFin = horaFin;
     }
 }

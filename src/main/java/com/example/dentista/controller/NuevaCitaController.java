@@ -11,7 +11,10 @@ import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 /**
@@ -31,7 +34,7 @@ public class NuevaCitaController implements Initializable {
     @FXML
     private DatePicker fechaCitaDtPicker;
     @FXML
-    private TextField duracionField;
+    private ComboBox horafinCBox;
     @FXML
     private TextArea descripcionTextArea;
     private String nombreSeleccionado;
@@ -77,7 +80,7 @@ public class NuevaCitaController implements Initializable {
     @FXML
     public boolean comprobarDuracion() {
         boolean comprobado = false;
-        if (duracionField.getText().matches("[0-9]+") && duracionField.getText().length() <= 2) {
+        if (Integer.parseInt(horaComboBox.getValue().toString().replace(":", "")) < Integer.parseInt(horafinCBox.getValue().toString().replace(":", ""))) {
             comprobado = true;
         }
         return comprobado;
@@ -90,13 +93,24 @@ public class NuevaCitaController implements Initializable {
      * -> false - si no es correcta
      */
     @FXML
-    public boolean comprobarDisponibilidad() {
+    public boolean comprobarDisponibilidad() throws ParseException {
         boolean disponible = true;
         ArrayList<String> fechasHoras = CitaTable.sacarFechasHoras(fechaCitaDtPicker.getValue(), new DataBaseConnection().getConnection());
         System.out.println(fechasHoras);
         for (int i = 0; i < fechasHoras.size(); i = i + 2) {
+            Date inicioGuardado = new SimpleDateFormat("HH:mm").parse(fechasHoras.get(i));
+            Date finalGuardado = new SimpleDateFormat("HH:mm").parse(fechasHoras.get(i + 1));
+            Date inicioCita = new SimpleDateFormat("HH:mm").parse(horaComboBox.getValue().toString());
+            Date finalCita = new SimpleDateFormat("HH:mm").parse(horafinCBox.getValue().toString());
 
+            if(finalCita.after(finalGuardado) && inicioCita.before(inicioGuardado)
+                    || inicioCita.before(finalGuardado) && finalCita.after(finalGuardado)
+                    || inicioCita.before(inicioGuardado) && finalCita.before(finalGuardado)
+                    || inicioCita.equals(inicioGuardado)){
+                disponible = false;
+            }
         }
+        System.out.println(disponible);
         return disponible;
     }
 
@@ -106,14 +120,15 @@ public class NuevaCitaController implements Initializable {
      * @throws IOException
      */
     @FXML
-    public void guardarCita() throws IOException {
-        if (!clienteComboBox.getPromptText().toString().equals("- Seleccione un cliente -") && !horaComboBox.getPromptText().toString().equals("- Hora de la cita -") && !fechaCitaDtPicker.getPromptText().equals("Elija la fecha...")) {
+    public void guardarCita() throws IOException, ParseException {
+        if (!clienteComboBox.getPromptText().toString().equals("- Seleccione un cliente -") && !horaComboBox.getPromptText().toString().equals("- Hora de la cita -")
+                && !horafinCBox.getPromptText().toString().equals("- Hora de fin -") && !fechaCitaDtPicker.getPromptText().equals("Elija la fecha...")) {
             if (comprobarDisponibilidad()) {
                 if (comprobarDuracion()) {
                     Cita cita = new Cita(fechaCitaDtPicker.getValue(),
                             BuscarController.filtrarCliente(nombreSeleccionado).get(0).getDni(),
                             descripcionTextArea.getText(), horaComboBox.getValue().toString(),
-                            Integer.parseInt(duracionField.getText()));
+                            horafinCBox.getValue().toString());
                     if (CitaTable.nuevaCita(cita, new DataBaseConnection().getConnection())) {
                         Alert a = new Alert(Alert.AlertType.INFORMATION);
                         a.setTitle("REGISTRADO");
@@ -124,7 +139,7 @@ public class NuevaCitaController implements Initializable {
                 } else {
                     Alert a = new Alert(Alert.AlertType.ERROR);
                     a.setTitle("ERROR");
-                    a.setContentText("Solo se pueden introducir dos dígitos numéricos");
+                    a.setContentText("Solo puedes introducir una fecha posterior a la de inicio");
                     a.show();
                 }
             } else {
@@ -146,11 +161,19 @@ public class NuevaCitaController implements Initializable {
     }
 
     /**
-     * Método de comprobación de selección de hora
+     * Método de comprobación de selección de hora de inicio
      */
     @FXML
     public void seleccionarHora() {
         horaComboBox.setPromptText(horaComboBox.getValue().toString());
+    }
+
+    /**
+     * Método de comprobación de selección de hora de fin
+     */
+    @FXML
+    public void seleccionarHoraFin() {
+        horafinCBox.setPromptText(horafinCBox.getValue().toString());
     }
 
     /**
@@ -174,6 +197,8 @@ public class NuevaCitaController implements Initializable {
         for (int i = 16; i < 21; i++) {
             horaComboBox.getItems().add(i + ":00");
             horaComboBox.getItems().add(i + ":30");
+            horafinCBox.getItems().add(i + ":00");
+            horafinCBox.getItems().add(i + ":30");
         }
     }
 }

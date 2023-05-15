@@ -1,7 +1,6 @@
 package com.example.dentista.database;
 
 import com.example.dentista.model.Cita;
-import com.example.dentista.model.Cliente;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -16,8 +15,8 @@ public class CitaTable {
         try {
             Statement st = con.createStatement();
             int updated = st.executeUpdate("INSERT INTO citas VALUES ('" + cita.getFechaCita()
-                    + "','" + cita.getDniCliente() + "','" + cita.getDescripcion() + "','" + cita.getHora().replace(":", "")
-                    + "','" + cita.getDuracionMin() + "')");
+                    + "','" + cita.getDniCliente() + "','" + cita.getDescripcion() + "','" + cita.getHoraInicio()
+                    + "','" + cita.getHoraFin() + "')");
             if (updated == 1) {
                 registrado = true;
             }
@@ -49,7 +48,7 @@ public class CitaTable {
         ArrayList<String> fechashoras = new ArrayList<>();
         try {
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("SELECT hora,duracion_min FROM citas WHERE fecha_cita = '" + fecha + "'");
+            ResultSet rs = st.executeQuery("SELECT hora_inicio,hora_fin FROM citas WHERE fecha_cita = '" + fecha + "'");
             while (rs.next()) {
                 fechashoras.add(rs.getString(1));
                 fechashoras.add(rs.getString(2));
@@ -84,7 +83,7 @@ public class CitaTable {
 
             int updated = st.executeUpdate("UPDATE citas SET fecha_cita = '" + cita.getFechaCita() + "',dni_cliente = '"
                     + cita.getDniCliente() + "',descripcion = '" + cita.getDescripcion() + "',hora = '"
-                    + cita.getHora() + "',duracion_min = " + cita.getDuracionMin() +
+                    + cita.getHoraInicio() + "',duracion_min = " + cita.getHoraFin() +
                     " WHERE dni_cliente = (SELECT dni FROM clientes WHERE nombre = '" + nombreOriginal + "') ;");
             if (updated == 1) {
                 modificado = true;

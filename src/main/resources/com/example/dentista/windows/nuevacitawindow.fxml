@@ -14,18 +14,18 @@
          <children>
             <Label fx:id="filterLabel1" layoutX="60.0" layoutY="38.0" text="Filtrar cliente:" />
             <Label fx:id="clienteLabel" layoutX="68.0" layoutY="77.0" text="Cliente" />
-            <Label fx:id="horaLabel" layoutX="60.0" layoutY="139.0" text="Hora" />
-            <Label fx:id="duracionLabel" layoutX="60.0" layoutY="191.0" text="Duración" />
-            <TextField fx:id="duracionField" layoutX="51.0" layoutY="212.0" prefHeight="25.0" prefWidth="176.0" promptText="Escriba aquí (en minutos)..." text="0" />
+            <Label fx:id="horaLabel" layoutX="60.0" layoutY="139.0" text="Hora de inicio" />
+            <Label fx:id="duracionLabel" layoutX="60.0" layoutY="204.0" text="Hora de finalización" />
             <Label fx:id="fechaCitaLabel" layoutX="265.0" layoutY="77.0" text="Fecha de la cita" />
             <DatePicker fx:id="fechaCitaDtPicker" editable="false" layoutX="265.0" layoutY="99.0" onAction="#seleccionarFecha" promptText="Elija la fecha..." />
-            <Button fx:id="volverButton" layoutX="277.0" layoutY="212.0" mnemonicParsing="false" onAction="#volverMain" text="Volver" />
-            <Button fx:id="guardarButton" layoutX="370.0" layoutY="212.0" mnemonicParsing="false" onAction="#guardarCita" text="Guardar" />
+            <Button fx:id="volverButton" layoutX="277.0" layoutY="225.0" mnemonicParsing="false" onAction="#volverMain" text="Volver" />
+            <Button fx:id="guardarButton" layoutX="370.0" layoutY="225.0" mnemonicParsing="false" onAction="#guardarCita" text="Guardar" />
             <Label fx:id="descripcionLabel" layoutX="263.0" layoutY="130.0" text="Descripción" />
             <TextArea fx:id="descripcionTextArea" layoutX="263.0" layoutY="153.0" prefHeight="46.0" prefWidth="176.0" promptText="Escriba aqui..." />
             <TextField fx:id="filterField" layoutX="151.0" layoutY="34.0" onInputMethodTextChanged="#filtrarCliente" onKeyPressed="#filtrarCliente" onKeyReleased="#filtrarCliente" onKeyTyped="#filtrarCliente" prefHeight="25.0" prefWidth="287.0" promptText="Filtrar..." />
             <ComboBox fx:id="clienteComboBox" layoutX="52.0" layoutY="99.0" onAction="#tomarNombre" prefHeight="25.0" prefWidth="176.0" promptText="- Seleccione un cliente -" />
             <ComboBox fx:id="horaComboBox" layoutX="52.0" layoutY="164.0" onAction="#seleccionarHora" prefHeight="25.0" prefWidth="176.0" promptText="- Hora de la cita -" />
+            <ComboBox fx:id="horafinCBox" layoutX="52.0" layoutY="225.0" onAction="#seleccionarHoraFin" prefHeight="25.0" prefWidth="176.0" promptText="- Hora de fin -" />
          </children>
       </AnchorPane>
    </children>
