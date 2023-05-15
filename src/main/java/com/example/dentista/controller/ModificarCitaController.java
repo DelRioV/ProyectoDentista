@@ -71,6 +71,9 @@ public class ModificarCitaController implements Initializable {
         }
     }
 
+    /**
+     * Método que saca las citas del cliente seleccionado en el combo box
+     */
     @FXML
     public void sacarCitas() {
         if (clienteComboBox.getValue() != null) {
@@ -91,6 +94,9 @@ public class ModificarCitaController implements Initializable {
         }
     }
 
+    /**
+     * Saca los datos de la cita seleccionada y rellena los campos correspondientes
+     */
     @FXML
     public void rellenarDatos() {
         if (citaComboBox.getValue() != null) {
@@ -117,6 +123,12 @@ public class ModificarCitaController implements Initializable {
         }
     }
 
+    /**
+     * Se encarga de ejecutar la sentencia sql de actualización de la base de datos
+     *
+     * @throws IOException
+     * @throws ParseException -> Si se produce un fallo de conversion de String a Date
+     */
     @FXML
     public void modificarCita() throws IOException, ParseException {
         if (!clienteComboBox.getPromptText().toString().equals("- Seleccione un cliente -") && !horaComboBox.getPromptText().toString().equals("- Hora de la cita -") && !fechaCitaDtPicker.getPromptText().equals("Elija la fecha...")) {
@@ -200,6 +212,12 @@ public class ModificarCitaController implements Initializable {
         fechaCitaDtPicker.setPromptText(fechaCitaDtPicker.getValue().toString());
     }
 
+    /**
+     * Método que se ejecuta al cargar la pantalla
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
