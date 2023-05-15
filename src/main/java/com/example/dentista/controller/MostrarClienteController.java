@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
  * @author: Pablo Salvadro Del Río Vergara
  * @version: 08/05/2023
  */
-public class MostrarClientesController implements Initializable {
+public class MostrarClienteController implements Initializable {
     @FXML
     private TextField filterField;
     @FXML

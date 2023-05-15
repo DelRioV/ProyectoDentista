@@ -63,13 +63,15 @@ public class EliminarClienteController implements Initializable {
                 Alert a = new Alert(Alert.AlertType.INFORMATION);
                 a.setTitle("INFORMACIÓN");
                 a.setContentText("Cliente eliminado con éxito");
-                a.show();                App.changeScene("windows/eliminarclientewindow.fxml", 469, 130);
+                a.show();
+                App.changeScene("windows/eliminarclientewindow.fxml", 469, 130);
             }
         } else {
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setTitle("ERROR");
             a.setContentText("Seleccione un cliente");
-            a.show();        }
+            a.show();
+        }
     }
 
     /**
@@ -77,8 +79,11 @@ public class EliminarClienteController implements Initializable {
      */
     @FXML
     public void seleccionarCliente() {
-        clienteComboBox.setPromptText(clienteComboBox.getValue().toString());
+        if (clienteComboBox.getValue() != null) {
+            clienteComboBox.setPromptText(clienteComboBox.getValue().toString());
+        }
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         filtrarCliente();

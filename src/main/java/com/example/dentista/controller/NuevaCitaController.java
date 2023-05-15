@@ -67,8 +67,11 @@ public class NuevaCitaController implements Initializable {
      */
     @FXML
     public void tomarNombre() {
-        nombreSeleccionado = clienteComboBox.getValue().toString();
-        seleccionarCliente();
+        if (clienteComboBox.getValue() != null) {
+
+            nombreSeleccionado = clienteComboBox.getValue().toString();
+            seleccionarCliente();
+        }
     }
 
     /**
@@ -103,10 +106,10 @@ public class NuevaCitaController implements Initializable {
             Date inicioCita = new SimpleDateFormat("HH:mm").parse(horaComboBox.getValue().toString());
             Date finalCita = new SimpleDateFormat("HH:mm").parse(horafinCBox.getValue().toString());
 
-            if(finalCita.after(finalGuardado) && inicioCita.before(inicioGuardado)
+            if (finalCita.after(finalGuardado) && inicioCita.before(inicioGuardado)
                     || inicioCita.before(finalGuardado) && finalCita.after(finalGuardado)
                     || inicioCita.before(inicioGuardado) && finalCita.before(finalGuardado)
-                    || inicioCita.equals(inicioGuardado)){
+                    || inicioCita.equals(inicioGuardado)) {
                 disponible = false;
             }
         }
@@ -157,7 +160,9 @@ public class NuevaCitaController implements Initializable {
      */
     @FXML
     public void seleccionarCliente() {
-        clienteComboBox.setPromptText(clienteComboBox.getValue().toString());
+        if (clienteComboBox.getValue() != null) {
+            clienteComboBox.setPromptText(clienteComboBox.getValue().toString());
+        }
     }
 
     /**

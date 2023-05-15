@@ -75,21 +75,23 @@ public class ModificarClienteController implements Initializable {
      */
     @FXML
     public void cargarCliente() {
-        clienteComboBox.setPromptText(clienteComboBox.getValue().toString());
-        String cliente = clienteComboBox.getValue().toString();
-        Connection connection = new DataBaseConnection().getConnection();
-        try {
-            Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery("SELECT nombre,dni,telefono,nacimiento FROM clientes WHERE nombre = '" + cliente + "'");
-            while (rs.next()) {
-                nombreField.setText(rs.getString(1));
-                dniField.setText(rs.getString(2));
-                telefonoField.setText(rs.getString(3));
-                nacimientoDtPicker.setValue(rs.getDate(4).toLocalDate());
-            }
-            connection.close();
-        } catch (Exception e) {
+        if(clienteComboBox.getValue()!=null) {
+            clienteComboBox.setPromptText(clienteComboBox.getValue().toString());
+            String cliente = clienteComboBox.getValue().toString();
+            Connection connection = new DataBaseConnection().getConnection();
+            try {
+                Statement st = connection.createStatement();
+                ResultSet rs = st.executeQuery("SELECT nombre,dni,telefono,nacimiento FROM clientes WHERE nombre = '" + cliente + "'");
+                while (rs.next()) {
+                    nombreField.setText(rs.getString(1));
+                    dniField.setText(rs.getString(2));
+                    telefonoField.setText(rs.getString(3));
+                    nacimientoDtPicker.setValue(rs.getDate(4).toLocalDate());
+                }
+                connection.close();
+            } catch (Exception e) {
 
+            }
         }
     }
 

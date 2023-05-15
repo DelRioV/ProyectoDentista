@@ -73,44 +73,48 @@ public class ModificarCitaController implements Initializable {
 
     @FXML
     public void sacarCitas() {
-        citaComboBox.getItems().clear();
-        seleccionarCliente();
-        if (!clienteComboBox.getPromptText().equals("- Seleccione un cliente -")) {
-            ArrayList<String> citasNombres = CitaTable.sacarCitasNombre(clienteComboBox.getValue().toString(), new DataBaseConnection().getConnection());
-            for (String cita : citasNombres) {
-                citaComboBox.getItems().add(cita);
+        if (clienteComboBox.getValue() != null) {
+
+            citaComboBox.getItems().clear();
+            seleccionarCliente();
+            if (!clienteComboBox.getPromptText().equals("- Seleccione un cliente -")) {
+                ArrayList<String> citasNombres = CitaTable.sacarCitasNombre(clienteComboBox.getValue().toString(), new DataBaseConnection().getConnection());
+                for (String cita : citasNombres) {
+                    citaComboBox.getItems().add(cita);
+                }
+            } else {
+                Alert a = new Alert(Alert.AlertType.ERROR);
+                a.setTitle("ERROR");
+                a.setContentText("Seleccione el cliente para ver las citas del cliente");
+                a.show();
             }
-        } else {
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setTitle("ERROR");
-            a.setContentText("Seleccione el cliente para ver las citas del cliente");
-            a.show();
         }
     }
 
     @FXML
     public void rellenarDatos() {
-        String fecha = citaComboBox.getValue().toString().substring(0, citaComboBox.getValue().toString().indexOf("|"));
-        try {
-            Connection con = new DataBaseConnection().getConnection();
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("SELECT dni FROM clientes " + " WHERE nombre = '" + clienteComboBox.getValue().toString() + "'");
-            rs.next();
-            dni = rs.getString(1);
-            rs = st.executeQuery("SELECT * FROM citas WHERE fecha_cita = '" + fecha.trim() + "' AND dni_cliente = '" + dni + "'");
-            while (rs.next()) {
-                fechaCitaDtPicker.setValue(rs.getDate(1).toLocalDate());
-                fechaCitaDtPicker.setPromptText(rs.getString(1));
-                descripcionTextArea.setText(rs.getString(3));
-                horaComboBox.setValue(rs.getString(4).substring(0, 2) + ":" + rs.getString(4).substring(2));
-                horaComboBox.setPromptText(rs.getString(4));
-                horafinCBox.setValue(rs.getString(5));
+        if (citaComboBox.getValue() != null) {
+            String fecha = citaComboBox.getValue().toString().substring(0, citaComboBox.getValue().toString().indexOf("|"));
+            try {
+                Connection con = new DataBaseConnection().getConnection();
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery("SELECT dni FROM clientes " + " WHERE nombre = '" + clienteComboBox.getValue().toString() + "'");
+                rs.next();
+                dni = rs.getString(1);
+                rs = st.executeQuery("SELECT * FROM citas WHERE fecha_cita = '" + fecha.trim() + "' AND dni_cliente = '" + dni + "'");
+                while (rs.next()) {
+                    fechaCitaDtPicker.setValue(rs.getDate(1).toLocalDate());
+                    fechaCitaDtPicker.setPromptText(rs.getString(1));
+                    descripcionTextArea.setText(rs.getString(3));
+                    horaComboBox.setValue(rs.getString(4).substring(0, 2) + ":" + rs.getString(4).substring(2));
+                    horaComboBox.setPromptText(rs.getString(4));
+                    horafinCBox.setValue(rs.getString(5));
+                }
+                con.close();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            con.close();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-
     }
 
     @FXML
@@ -175,7 +179,9 @@ public class ModificarCitaController implements Initializable {
      */
     @FXML
     public void seleccionarCliente() {
-        clienteComboBox.setPromptText(clienteComboBox.getValue().toString());
+        if (clienteComboBox.getValue() != null) {
+            clienteComboBox.setPromptText(clienteComboBox.getValue().toString());
+        }
     }
 
     /**
