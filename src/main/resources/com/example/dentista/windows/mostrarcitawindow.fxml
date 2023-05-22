@@ -9,9 +9,9 @@
 <AnchorPane prefHeight="338.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dentista.controller.MostrarCitaController">
    <children>
       <Label fx:id="diaLabel" layoutX="79.0" layoutY="49.0" text="Filtrar por día" />
-      <DatePicker fx:id="diaDtPicker" editable="false" layoutX="177.0" layoutY="45.0" prefHeight="25.0" prefWidth="187.0" promptText="Seleccione un día" />
+      <DatePicker fx:id="diaDtPicker" editable="false" layoutX="177.0" layoutY="45.0" onAction="#filtrarPorDia" prefHeight="25.0" prefWidth="187.0" promptText="Seleccione un día" />
       <TableView fx:id="tablaCitasTableView" layoutX="77.0" layoutY="100.0" prefHeight="200.0" prefWidth="454.0" />
       <Button fx:id="volverButton" layoutX="393.0" layoutY="45.0" mnemonicParsing="false" onAction="#volverMain" text="Volver" />
-      <Button fx:id="wappButton" layoutX="462.0" layoutY="45.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Icono Whatsapp" />
+      <Button fx:id="wappButton" layoutX="462.0" layoutY="45.0" mnemonicParsing="false" onMouseClicked="#mandarMensaje" prefHeight="25.0" prefWidth="72.0" text="Icono Whatsapp" />
    </children>
 </AnchorPane>

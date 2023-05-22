@@ -3,6 +3,7 @@ package com.example.dentista.database;
 import com.example.dentista.model.Cliente;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class ClienteTable {
@@ -54,5 +55,20 @@ public class ClienteTable {
 
         }
         return elimniado;
+    }
+
+    public static Cliente tomarCliente(Connection con, String dni) {
+        Cliente cliente =  null;
+        try {
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM clientes WHERE dni = '" + dni + "'");
+            while (rs.next()){
+                cliente = new Cliente(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4));
+            }
+            con.close();
+        } catch (Exception e) {
+
+        }
+        return cliente;
     }
 }

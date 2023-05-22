@@ -113,7 +113,6 @@ public class NuevaCitaController implements Initializable {
                 disponible = false;
             }
         }
-        System.out.println(disponible);
         return disponible;
     }
 
@@ -137,7 +136,7 @@ public class NuevaCitaController implements Initializable {
                         a.setTitle("REGISTRADO");
                         a.setContentText("SE HA CONFIRMADO EL REGISTRO DE SU CITA");
                         a.show();
-                        App.changeScene("windows/nuevacitawindow.fxml", 493, 297);
+                        volverMain();
                     }
                 } else {
                     Alert a = new Alert(Alert.AlertType.ERROR);
