@@ -4,6 +4,8 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="338.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dentista.controller.MostrarCitaController">
@@ -12,6 +14,10 @@
       <DatePicker fx:id="diaDtPicker" editable="false" layoutX="177.0" layoutY="45.0" onAction="#filtrarPorDia" prefHeight="25.0" prefWidth="187.0" promptText="Seleccione un día" />
       <TableView fx:id="tablaCitasTableView" layoutX="77.0" layoutY="100.0" prefHeight="200.0" prefWidth="454.0" />
       <Button fx:id="volverButton" layoutX="393.0" layoutY="45.0" mnemonicParsing="false" onAction="#volverMain" text="Volver" />
-      <Button fx:id="wappButton" layoutX="462.0" layoutY="45.0" mnemonicParsing="false" onMouseClicked="#mandarMensaje" prefHeight="25.0" prefWidth="72.0" text="Icono Whatsapp" />
+      <ImageView fx:id="whatImg" fitHeight="44.0" fitWidth="59.0" layoutX="487.0" layoutY="36.0" onMouseClicked="#mandarMensaje" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../static/img/600px-Whatsapp_logo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
