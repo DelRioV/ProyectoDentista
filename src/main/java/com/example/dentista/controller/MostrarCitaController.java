@@ -58,21 +58,23 @@ public class MostrarCitaController implements Initializable {
 
     @FXML
     public void mandarMensaje() throws MalformedURLException, UnsupportedEncodingException {
-        Cita cita = (Cita) tablaCitasTableView.getSelectionModel().getSelectedItem();
-        Cliente cliente = ClienteTable.tomarCliente(new DataBaseConnection().getConnection(), cita.getDniCliente());
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setHeaderText(null);
-        alert.setTitle("Confirmación");
-        alert.setContentText("¿Quieres mandar un mensaje al cliente seleccionado con su cita?");
-        Optional<ButtonType> action = alert.showAndWait();
-        if (action.get() == ButtonType.OK) {
-            URL url = new URL("https://wa.me/" + "+34" + cliente.getTelefono() + "/?" + "text=¡Buenas!%20Le%20recordamos%20que%20el%20día%20" +
-                    cita.getFechaCita() + "%20tiene%20cita%20a%20las%20" + cita.getHoraInicio() + ".%20Le%20rogamos%20que%20confirme%20su%20cita.%20¡Muchas%20gracias!");
-            try {
-                java.awt.Desktop.getDesktop().browse(url.toURI());
-            } catch (Exception e) {
-                e.printStackTrace();
+        if(tablaCitasTableView.getSelectionModel().getSelectedItem() != null) {
+            Cita cita = (Cita) tablaCitasTableView.getSelectionModel().getSelectedItem();
+            Cliente cliente = ClienteTable.tomarCliente(new DataBaseConnection().getConnection(), cita.getDniCliente());
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setHeaderText(null);
+            alert.setTitle("Confirmación");
+            alert.setContentText("¿Quieres mandar un mensaje al cliente seleccionado con su cita?");
+            Optional<ButtonType> action = alert.showAndWait();
+            if (action.get() == ButtonType.OK) {
+                WhatsappController.whatsapp(cliente, cita);
             }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("ERROR");
+            alert.setContentText("Seleccione una cita para poder mandarle un recordatorio");
+            alert.show();
         }
     }
 
