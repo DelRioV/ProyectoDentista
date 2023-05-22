@@ -4,14 +4,13 @@ import com.example.dentista.App;
 import com.example.dentista.model.Cliente;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -46,9 +45,8 @@ public class MostrarClienteController implements Initializable {
      */
     @FXML
     public void volverMain() throws IOException {
-        App.changeScene("windows/mainwindow.fxml", 620, 400);
+        EliminarCitaController.volverMain();
     }
-
     /**
      * Método que se realiza al cargar la ventana, se encarga de añadir las columnas a la tabla donde se van a mostrar los clientes
      *

@@ -21,6 +21,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -54,9 +55,8 @@ public class ModificarCitaController implements Initializable {
      */
     @FXML
     public void volverMain() throws IOException {
-        App.changeScene("windows/mainwindow.fxml", 620, 400);
+        EliminarCitaController.volverMain();
     }
-
     /**
      * Método que se aplica cada vez que ocurre un cambio en el componente "filterField",
      * que va rellenando el combo box con los datos recibidos del método BuscarController.filtrarNombre()

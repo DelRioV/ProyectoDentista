@@ -7,6 +7,7 @@ import com.example.dentista.model.Cliente;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
@@ -16,6 +17,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class EliminarCitaController implements Initializable {
@@ -32,8 +34,15 @@ public class EliminarCitaController implements Initializable {
      * @throws IOException
      */
     @FXML
-    public void volverMain() throws IOException {
-        App.changeScene("windows/mainwindow.fxml", 620, 400);
+    public static void volverMain() throws IOException {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText(null);
+        alert.setTitle("Confirmación");
+        alert.setContentText("¿Seguro que quieres volver al menu principal?");
+        Optional<ButtonType> action = alert.showAndWait();
+        if (action.get() == ButtonType.OK) {
+            App.changeScene("windows/mainwindow.fxml", 641, 288);
+        }
     }
 
     /**

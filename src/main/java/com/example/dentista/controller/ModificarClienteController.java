@@ -6,10 +6,7 @@ import com.example.dentista.database.DataBaseConnection;
 import com.example.dentista.model.Cliente;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -17,6 +14,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -46,9 +44,8 @@ public class ModificarClienteController implements Initializable {
      * @throws IOException
      */
     public void volverMain() throws IOException {
-        App.changeScene("windows/mainwindow.fxml", 620, 400);
+        EliminarCitaController.volverMain();
     }
-
     /**
      * Método de comprobación de selección de fecha de nacimiento
      */

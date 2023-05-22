@@ -16,6 +16,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.Optional;
+
 
 /**
  * Clase que controla las acciones de la ventana nuevacitawindow.fxml
@@ -46,9 +48,8 @@ public class NuevaCitaController implements Initializable {
      */
     @FXML
     public void volverMain() throws IOException {
-        App.changeScene("windows/mainwindow.fxml", 620, 400);
+        EliminarCitaController.volverMain();
     }
-
     /**
      * Método que se aplica cada vez que ocurre un cambio en el componente "filterField",
      * que va rellenando el combo box con los datos recibidos del método BuscarController.filtrarNombre()

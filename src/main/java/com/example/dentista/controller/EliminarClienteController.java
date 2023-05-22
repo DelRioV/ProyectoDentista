@@ -6,12 +6,14 @@ import com.example.dentista.database.DataBaseConnection;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -34,9 +36,8 @@ public class EliminarClienteController implements Initializable {
      * @throws IOException
      */
     public void volverMain() throws IOException {
-        App.changeScene("windows/mainwindow.fxml", 620, 400);
+        EliminarCitaController.volverMain();
     }
-
     /**
      * Método que se aplica cada vez que ocurre un cambio en el componente "filterField",
      * que va rellenando el combo box con los datos recibidos del método BuscarController.filtrarNombre()

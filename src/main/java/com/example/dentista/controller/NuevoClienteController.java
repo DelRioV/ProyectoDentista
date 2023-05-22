@@ -6,6 +6,7 @@ import com.example.dentista.database.DataBaseConnection;
 import com.example.dentista.model.Cliente;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Optional;
 
 /**
  * Clase que controla las acciones de la ventana nuevoclientewindow.fxml
@@ -38,9 +40,8 @@ public class NuevoClienteController {
      */
     @FXML
     public void volverMain() throws IOException {
-        App.changeScene("windows/mainwindow.fxml", 620, 400);
+        EliminarCitaController.volverMain();
     }
-
     /**
      * Método de comprobación de selección de fecha de nacimiento
      */

@@ -4,12 +4,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane minHeight="400.0" minWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dentista.controller.MainWindowController">
+<AnchorPane minHeight="288.0" minWidth="482.0" prefHeight="288.0" prefWidth="641.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dentista.controller.MainWindowController">
    <children>
       <ToolBar prefHeight="59.0" prefWidth="477.0">
          <items>
@@ -34,7 +35,7 @@
             <Insets right="1.0" top="1.0" />
          </opaqueInsets>
       </ToolBar>
-      <ImageView fx:id="imgLogo" fitHeight="131.0" fitWidth="132.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgLogo" fitHeight="99.0" fitWidth="97.0" layoutX="10.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../static/img/logo_dent.jpg" />
          </image>
@@ -44,5 +45,7 @@
             <Label fx:id="fechaLabel" alignment="CENTER_RIGHT" prefHeight="42.0" prefWidth="124.0" />
          </items>
       </ToolBar>
+      <TableView fx:id="tablaCitasTableView" layoutX="122.0" layoutY="74.0" prefHeight="200.0" prefWidth="477.0" />
+      <Label layoutX="19.0" layoutY="74.0" text="Citas para hoy:" />
    </children>
 </AnchorPane>

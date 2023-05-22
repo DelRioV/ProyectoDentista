@@ -120,12 +120,6 @@ public class CitaTable {
             while (rs.next()) {
                 Cita cita = new Cita(rs.getDate(1).toLocalDate(), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
                 citas.add(cita);
-                System.out.println(cita.getFechaCita());
-                System.out.println(cita.getDniCliente());
-                System.out.println(cita.getDescripcion());
-                System.out.println(cita.getHoraInicio());
-                System.out.println(cita.getHoraFin() + "\n\n");
-
             }
             con.close();
         } catch (Exception e) {

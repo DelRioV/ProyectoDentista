@@ -35,9 +35,8 @@ public class MostrarCitaController implements Initializable {
      */
     @FXML
     public void volverMain() throws IOException {
-        App.changeScene("windows/mainwindow.fxml", 620, 400);
+        EliminarCitaController.volverMain();
     }
-
     @FXML
     public void filtrarPorDia() {
         tomarDia();
