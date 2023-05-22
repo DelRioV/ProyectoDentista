@@ -93,4 +93,22 @@ public class CitaTable {
         }
         return modificado;
     }
+
+    public static boolean eliminarCita(String nombre, Connection con, String fecha) {
+        boolean eliminado = false;
+        try {
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("SELECT dni FROM clientes " + " WHERE nombre = '" + nombre + "'");
+            rs.next();
+            String dni = rs.getString(1);
+            int filasUpdated = st.executeUpdate("DELETE FROM citas WHERE fecha_cita = '" + fecha.trim() + "' AND dni_cliente = '" + dni + "'");
+            if (filasUpdated != 0) {
+                eliminado = true;
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return eliminado;
+    }
 }

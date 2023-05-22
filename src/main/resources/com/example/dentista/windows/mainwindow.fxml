@@ -25,8 +25,8 @@
                <items>
                   <MenuItem fx:id="nuevoCitaButton" mnemonicParsing="false" onAction="#cambiarNuevaCita" text="Nuevo..." />
                   <MenuItem fx:id="modificarCitaButton" mnemonicParsing="false" onAction="#cambiarModCita" text="Modificar..." />
-                  <MenuItem fx:id="eliminarCitaButton" mnemonicParsing="false" text="Eliminar..." />
-                  <MenuItem fx:id="mostrarCitaButton" mnemonicParsing="false" text="Mostrar..." />
+                  <MenuItem fx:id="eliminarCitaButton" mnemonicParsing="false" onAction="#cambiarElimCita" text="Eliminar..." />
+                  <MenuItem fx:id="mostrarCitaButton" mnemonicParsing="false" onAction="#cambiarMostrarCita" text="Mostrar..." />
                </items>
             </MenuButton>
          </items>

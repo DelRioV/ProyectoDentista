@@ -62,6 +62,16 @@ public class MainWindowController implements Initializable {
         App.changeScene("windows/modificarcitawindow.fxml", 484, 329);
 
     }
+    @FXML
+    public void cambiarElimCita() throws IOException {
+        App.changeScene("windows/eliminarcitawindow.fxml", 491, 227);
+
+    }
+    @FXML
+    public void cambiarMostrarCita() throws IOException {
+        App.changeScene("windows/mostrarcitawindow.fxml", 600, 338);
+
+    }
     /**
      * Método que se ejecuta al realizar la carga del archivo mainwindow.fxml
      *

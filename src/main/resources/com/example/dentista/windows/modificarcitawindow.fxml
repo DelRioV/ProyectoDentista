@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="256.0" prefWidth="449.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dentista.controller.ModificarCitaController">
    <children>
-      <AnchorPane layoutY="-6.0" prefHeight="329.0" prefWidth="484.0">
+      <AnchorPane layoutY="-6.0" prefHeight="334.0" prefWidth="484.0">
          <children>
             <Label fx:id="filterLabel1" layoutX="60.0" layoutY="38.0" text="Filtrar cliente:" />
             <Label fx:id="clienteLabel" layoutX="68.0" layoutY="77.0" text="Cliente" />

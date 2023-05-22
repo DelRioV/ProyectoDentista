@@ -13,8 +13,8 @@
       <Label fx:id="clienteLabel" layoutX="70.0" layoutY="92.0" text="Cliente" />
       <TextField fx:id="filterField" layoutX="153.0" layoutY="49.0" onInputMethodTextChanged="#filtrarCliente" onKeyPressed="#filtrarCliente" onKeyReleased="#filtrarCliente" onKeyTyped="#filtrarCliente" prefHeight="25.0" prefWidth="287.0" promptText="Filtrar..." />
       <ComboBox fx:id="clienteComboBox" layoutX="153.0" layoutY="88.0" onAction="#sacarCitas" prefHeight="25.0" prefWidth="287.0" promptText="- Seleccione un cliente -" />
-      <ComboBox fx:id="citaComboBox" layoutX="51.0" layoutY="130.0" onAction="#rellenarDatos" prefHeight="25.0" prefWidth="387.0" promptText="- Seleccione la cita que desea eliminar -" />
+      <ComboBox fx:id="citaComboBox" layoutX="51.0" layoutY="130.0" onAction="#seleccionarCita" prefHeight="25.0" prefWidth="387.0" promptText="- Seleccione la cita que desea eliminar -" />
       <Button fx:id="volverButton" layoutX="169.0" layoutY="175.0" mnemonicParsing="false" onAction="#volverMain" text="Volver" />
-      <Button fx:id="eliminarButton" layoutX="262.0" layoutY="175.0" mnemonicParsing="false" text="Eliminar" />
+      <Button fx:id="eliminarButton" layoutX="262.0" layoutY="175.0" mnemonicParsing="false" onAction="#eliminarCita" text="Eliminar" />
    </children>
 </AnchorPane>
