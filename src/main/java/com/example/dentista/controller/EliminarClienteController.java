@@ -65,8 +65,7 @@ public class EliminarClienteController implements Initializable {
                 a.setTitle("INFORMACIÓN");
                 a.setContentText("Cliente eliminado con éxito");
                 a.show();
-                App.changeScene("windows/eliminarclientewindow.fxml", 469, 130);
-            }
+                App.changeScene("windows/mainwindow.fxml", 641, 288);            }
         } else {
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setTitle("ERROR");

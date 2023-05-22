@@ -46,6 +46,7 @@ public class ModificarClienteController implements Initializable {
     public void volverMain() throws IOException {
         EliminarCitaController.volverMain();
     }
+
     /**
      * Método de comprobación de selección de fecha de nacimiento
      */
@@ -72,7 +73,7 @@ public class ModificarClienteController implements Initializable {
      */
     @FXML
     public void cargarCliente() {
-        if(clienteComboBox.getValue()!=null) {
+        if (clienteComboBox.getValue() != null) {
             clienteComboBox.setPromptText(clienteComboBox.getValue().toString());
             String cliente = clienteComboBox.getValue().toString();
             Connection connection = new DataBaseConnection().getConnection();
@@ -115,8 +116,8 @@ public class ModificarClienteController implements Initializable {
                         Alert a = new Alert(Alert.AlertType.INFORMATION);
                         a.setTitle("INFORMACIÓN");
                         a.setContentText("Cliente modificado con éxito");
-                        a.show();                        App.changeScene("windows/modificarclientewindow.fxml", 490, 280);
-
+                        a.show();
+                        App.changeScene("windows/mainwindow.fxml", 641, 288);
                     }
                 } else {
                     Alert a = new Alert(Alert.AlertType.ERROR);

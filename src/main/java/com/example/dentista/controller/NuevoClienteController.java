@@ -73,7 +73,7 @@ public class NuevoClienteController {
                         a.setTitle("INFORMACIÓN");
                         a.setContentText("Cliente registrado con éxito");
                         a.show();
-                        volverMain();
+                        App.changeScene("windows/mainwindow.fxml", 641, 288);
                     }
                 } else {
                     Alert a = new Alert(Alert.AlertType.ERROR);

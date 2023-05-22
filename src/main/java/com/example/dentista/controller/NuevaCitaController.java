@@ -137,7 +137,7 @@ public class NuevaCitaController implements Initializable {
                         a.setTitle("REGISTRADO");
                         a.setContentText("SE HA CONFIRMADO EL REGISTRO DE SU CITA");
                         a.show();
-                        volverMain();
+                        App.changeScene("windows/mainwindow.fxml", 641, 288);
                     }
                 } else {
                     Alert a = new Alert(Alert.AlertType.ERROR);

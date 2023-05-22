@@ -57,6 +57,7 @@ public class ModificarCitaController implements Initializable {
     public void volverMain() throws IOException {
         EliminarCitaController.volverMain();
     }
+
     /**
      * Método que se aplica cada vez que ocurre un cambio en el componente "filterField",
      * que va rellenando el combo box con los datos recibidos del método BuscarController.filtrarNombre()
@@ -141,7 +142,7 @@ public class ModificarCitaController implements Initializable {
                     a.setTitle("¡HECHO!");
                     a.setContentText("Cita modificada con éxito");
                     a.show();
-                    volverMain();
+                    App.changeScene("windows/mainwindow.fxml", 641, 288);
                 } else {
                     Alert a = new Alert(Alert.AlertType.ERROR);
                     a.setTitle("¡ERROR!");
