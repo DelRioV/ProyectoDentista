@@ -22,7 +22,7 @@
                   <MenuItem fx:id="mostrarClienteButton" mnemonicParsing="false" onAction="#cambiarMostrarCliente" text="Mostrar..." />
                </items>
             </MenuButton>
-            <MenuButton fx:id="citaButton" mnemonicParsing="false" text="Cita">
+            <MenuButton fx:id="citaButton" mnemonicParsing="false" styleClass="" text="Cita">
                <items>
                   <MenuItem fx:id="nuevoCitaButton" mnemonicParsing="false" onAction="#cambiarNuevaCita" text="Nuevo..." />
                   <MenuItem fx:id="modificarCitaButton" mnemonicParsing="false" onAction="#cambiarModCita" text="Modificar..." />
