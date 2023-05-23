@@ -69,6 +69,12 @@ public class NuevoClienteController {
                         a.setContentText("Cliente registrado con éxito");
                         a.show();
                         App.changeScene("windows/mainwindow.fxml", 641, 288);
+                    } else {
+                        Alert a = new Alert(Alert.AlertType.ERROR);
+                        a.setTitle("ERROR");
+                        a.setHeaderText(null);
+                        a.setContentText("No se pueden agregar dos clientes con el mismo nombre");
+                        a.show();
                     }
                 } else {
                     Alert a = new Alert(Alert.AlertType.ERROR);
