@@ -1,5 +1,6 @@
 package com.example.dentista.controller;
 
+import com.example.dentista.App;
 import com.example.dentista.database.CitaTable;
 import com.example.dentista.database.ClienteTable;
 import com.example.dentista.database.DataBaseConnection;
@@ -37,6 +38,7 @@ public class MostrarCitaController implements Initializable {
     @FXML
     public void filtrarPorDia() {
         tomarDia();
+        tablaCitasTableView.getItems().clear();
         ArrayList<Cita> citas = CitaTable.tomarCitas(new DataBaseConnection().getConnection(), diaDtPicker.getValue().toString());
         for (int i = 0; i < citas.size(); i++) {
             tablaCitasTableView.getItems().add(citas.get(i));
@@ -52,6 +54,10 @@ public class MostrarCitaController implements Initializable {
         }
     }
 
+    @FXML
+    public void recargar() throws IOException {
+        App.changeScene("windows/mostrarcitawindow.fxml", 600, 338);
+    }
     @FXML
     public void mandarMensaje() throws MalformedURLException, UnsupportedEncodingException {
         if(tablaCitasTableView.getSelectionModel().getSelectedItem() != null) {

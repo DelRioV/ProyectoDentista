@@ -97,25 +97,29 @@ public class ModificarCitaController implements Initializable {
     @FXML
     public void rellenarDatos() {
         if (citaComboBox.getValue() != null) {
-            String fecha = citaComboBox.getValue().toString().substring(0, citaComboBox.getValue().toString().indexOf("|"));
-            try {
-                Connection con = new DataBaseConnection().getConnection();
-                Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery("SELECT dni FROM clientes " + " WHERE nombre = '" + clienteComboBox.getValue().toString() + "'");
-                rs.next();
-                dni = rs.getString(1);
-                rs = st.executeQuery("SELECT * FROM citas WHERE fecha_cita = '" + fecha.trim() + "' AND dni_cliente = '" + dni + "'");
-                while (rs.next()) {
-                    fechaCitaDtPicker.setValue(rs.getDate(1).toLocalDate());
-                    fechaCitaDtPicker.setPromptText(rs.getString(1));
-                    descripcionTextArea.setText(rs.getString(3));
-                    horaComboBox.setValue(rs.getString(4));
-                    horaComboBox.setPromptText(rs.getString(4));
-                    horafinCBox.setValue(rs.getString(5));
+            citaComboBox.setPromptText(citaComboBox.getValue().toString());
+            if (citaComboBox.getValue() != null) {
+                String fecha = citaComboBox.getValue().toString().substring(0, citaComboBox.getValue().toString().indexOf("|"));
+                try {
+                    Connection con = new DataBaseConnection().getConnection();
+                    Statement st = con.createStatement();
+                    ResultSet rs = st.executeQuery("SELECT dni FROM clientes " + " WHERE nombre = '" + clienteComboBox.getValue().toString() + "'");
+                    rs.next();
+                    dni = rs.getString(1);
+                    rs = st.executeQuery("SELECT * FROM citas WHERE fecha_cita = '" + fecha.trim() + "' AND dni_cliente = '" + dni + "'");
+                    while (rs.next()) {
+                        fechaCitaDtPicker.setValue(rs.getDate(1).toLocalDate());
+                        fechaCitaDtPicker.setPromptText(rs.getString(1));
+                        descripcionTextArea.setText(rs.getString(3));
+                        horaComboBox.setValue(rs.getString(4));
+                        horaComboBox.setPromptText(rs.getString(4));
+                        horafinCBox.setValue(rs.getString(5));
+                        horafinCBox.setPromptText(rs.getString(5));
+                    }
+                    con.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                con.close();
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
     }
@@ -128,7 +132,7 @@ public class ModificarCitaController implements Initializable {
      */
     @FXML
     public void modificarCita() throws IOException, ParseException {
-        if (!clienteComboBox.getPromptText().toString().equals("- Seleccione un cliente -") && !horaComboBox.getPromptText().toString().equals("- Hora de la cita -") && !fechaCitaDtPicker.getPromptText().equals("Elija la fecha...")) {
+        if (!clienteComboBox.getPromptText().toString().equals("- Seleccione un cliente -") && !citaComboBox.getPromptText().toString().equals("- Seleccione la cita que desea modificar -") && !horaComboBox.getPromptText().toString().equals("- Hora de la cita -") && !fechaCitaDtPicker.getPromptText().equals("Elija la fecha...") && citaComboBox.getValue() != null) {
             if (comprobarDisponibilidad()) {
                 if (comprobarDuracion()) {
                     Cita cita = new Cita(fechaCitaDtPicker.getValue(), dni,
@@ -153,6 +157,11 @@ public class ModificarCitaController implements Initializable {
                     a.show();
                 }
             }
+        } else {
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setTitle("ERROR");
+            a.setContentText("Rellene los campos");
+            a.show();
         }
     }
 

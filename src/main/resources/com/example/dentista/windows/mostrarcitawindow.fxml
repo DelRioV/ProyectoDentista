@@ -13,10 +13,15 @@
       <Label fx:id="diaLabel" layoutX="79.0" layoutY="49.0" text="Filtrar por día" />
       <DatePicker fx:id="diaDtPicker" editable="false" layoutX="177.0" layoutY="45.0" onAction="#filtrarPorDia" prefHeight="25.0" prefWidth="187.0" promptText="Seleccione un día" />
       <TableView fx:id="tablaCitasTableView" layoutX="77.0" layoutY="100.0" prefHeight="200.0" prefWidth="454.0" />
-      <Button fx:id="volverButton" layoutX="393.0" layoutY="45.0" mnemonicParsing="false" onAction="#volverMain" text="Volver" />
+      <Button fx:id="volverButton" layoutX="382.0" layoutY="45.0" mnemonicParsing="false" onAction="#volverMain" text="Volver" />
       <ImageView fx:id="whatImg" fitHeight="44.0" fitWidth="59.0" layoutX="487.0" layoutY="36.0" onMouseClicked="#mandarMensaje" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../static/img/600px-Whatsapp_logo.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="447.0" layoutY="46.0" onMouseClicked="#recargar" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../static/img/refresh.png" />
          </image>
       </ImageView>
    </children>
