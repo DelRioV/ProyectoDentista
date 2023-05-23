@@ -12,6 +12,7 @@ public class CitaTable {
 
     public static boolean nuevaCita(Cita cita, Connection con) {
         boolean registrado = false;
+        System.out.println(cita.getHoraInicio());
         try {
             Statement st = con.createStatement();
             int updated = st.executeUpdate("INSERT INTO citas VALUES ('" + cita.getFechaCita()
@@ -76,14 +77,16 @@ public class CitaTable {
         return citasNombre;
     }
 
-    public static boolean modificarCita(Cita cita, Connection con, String nombreOriginal) {
+    public static boolean modificarCita(Cita cita, Connection con, String fechaNombre) {
         boolean modificado = false;
         try {
             Statement st = con.createStatement();
             int updated = st.executeUpdate("UPDATE citas SET fecha_cita = '" + cita.getFechaCita() + "',dni_cliente = '"
                     + cita.getDniCliente() + "',descripcion = '" + cita.getDescripcion() + "',hora_inicio = '"
                     + cita.getHoraInicio() + "',hora_fin = '" + cita.getHoraFin() +
-                    "' WHERE dni_cliente = (SELECT dni FROM clientes WHERE nombre = '" + nombreOriginal + "') ;");
+                    "' WHERE dni_cliente = (SELECT dni FROM clientes WHERE nombre = '" +
+                    fechaNombre.substring(fechaNombre.indexOf("|")+2, fechaNombre.length()).trim() + "') AND fecha_cita = '"
+                    + fechaNombre.substring(0,fechaNombre.indexOf("|")).trim() + "';");
             if (updated == 1) {
                 modificado = true;
             }

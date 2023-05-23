@@ -2,7 +2,6 @@ package com.example.dentista.controller;
 
 import com.example.dentista.App;
 import com.example.dentista.database.CitaTable;
-import com.example.dentista.database.ClienteTable;
 import com.example.dentista.database.DataBaseConnection;
 import com.example.dentista.model.Cita;
 import com.example.dentista.model.Cliente;
@@ -17,11 +16,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -55,7 +51,7 @@ public class ModificarCitaController implements Initializable {
      */
     @FXML
     public void volverMain() throws IOException {
-        EliminarCitaController.volverMain();
+        EliminarCitaController.volverMainStatic();
     }
 
     /**
@@ -113,7 +109,7 @@ public class ModificarCitaController implements Initializable {
                     fechaCitaDtPicker.setValue(rs.getDate(1).toLocalDate());
                     fechaCitaDtPicker.setPromptText(rs.getString(1));
                     descripcionTextArea.setText(rs.getString(3));
-                    horaComboBox.setValue(rs.getString(4).substring(0, 2) + ":" + rs.getString(4).substring(2));
+                    horaComboBox.setValue(rs.getString(4));
                     horaComboBox.setPromptText(rs.getString(4));
                     horafinCBox.setValue(rs.getString(5));
                 }
@@ -134,19 +130,26 @@ public class ModificarCitaController implements Initializable {
     public void modificarCita() throws IOException, ParseException {
         if (!clienteComboBox.getPromptText().toString().equals("- Seleccione un cliente -") && !horaComboBox.getPromptText().toString().equals("- Hora de la cita -") && !fechaCitaDtPicker.getPromptText().equals("Elija la fecha...")) {
             if (comprobarDisponibilidad()) {
-                Cita cita = new Cita(fechaCitaDtPicker.getValue(), dni,
-                        descripcionTextArea.getText(), horaComboBox.getValue().toString(),
-                        horafinCBox.getValue().toString());
-                if (CitaTable.modificarCita(cita, new DataBaseConnection().getConnection(), clienteComboBox.getValue().toString())) {
-                    Alert a = new Alert(Alert.AlertType.INFORMATION);
-                    a.setTitle("¡HECHO!");
-                    a.setContentText("Cita modificada con éxito");
-                    a.show();
-                    App.changeScene("windows/mainwindow.fxml", 641, 288);
+                if (comprobarDuracion()) {
+                    Cita cita = new Cita(fechaCitaDtPicker.getValue(), dni,
+                            descripcionTextArea.getText(), horaComboBox.getValue().toString(),
+                            horafinCBox.getValue().toString());
+                    if (CitaTable.modificarCita(cita, new DataBaseConnection().getConnection(), citaComboBox.getValue().toString())) {
+                        Alert a = new Alert(Alert.AlertType.INFORMATION);
+                        a.setTitle("¡HECHO!");
+                        a.setContentText("Cita modificada con éxito");
+                        a.show();
+                        App.changeScene("windows/mainwindow.fxml", 641, 288);
+                    } else {
+                        Alert a = new Alert(Alert.AlertType.ERROR);
+                        a.setTitle("¡ERROR!");
+                        a.setContentText("No es posible modificar la cita");
+                        a.show();
+                    }
                 } else {
                     Alert a = new Alert(Alert.AlertType.ERROR);
-                    a.setTitle("¡ERROR!");
-                    a.setContentText("No es posible modificar la cita");
+                    a.setTitle("ERROR");
+                    a.setContentText("Solo puedes introducir una fecha posterior a la de inicio");
                     a.show();
                 }
             }
@@ -159,6 +162,20 @@ public class ModificarCitaController implements Initializable {
     @FXML
     public void seleccionarHoraFin() {
         horafinCBox.setPromptText(horafinCBox.getValue().toString());
+    }
+
+    /**
+     * Método que comprueba si la duración introducida es correcta
+     *
+     * @return boolean -> true - si es correcta
+     * -> false - si no es correcta
+     */
+    public boolean comprobarDuracion() {
+        boolean comprobado = false;
+        if (Integer.parseInt(horaComboBox.getValue().toString().replace(":", "")) < Integer.parseInt(horafinCBox.getValue().toString().replace(":", ""))) {
+            comprobado = true;
+        }
+        return comprobado;
     }
 
     /**

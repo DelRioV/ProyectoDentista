@@ -1,6 +1,5 @@
 package com.example.dentista.controller;
 
-import com.example.dentista.App;
 import com.example.dentista.model.Cliente;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,7 +9,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -45,7 +43,7 @@ public class MostrarClienteController implements Initializable {
      */
     @FXML
     public void volverMain() throws IOException {
-        EliminarCitaController.volverMain();
+        EliminarCitaController.volverMainStatic();
     }
     /**
      * Método que se realiza al cargar la ventana, se encarga de añadir las columnas a la tabla donde se van a mostrar los clientes

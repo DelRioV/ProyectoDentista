@@ -14,7 +14,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -44,7 +43,7 @@ public class ModificarClienteController implements Initializable {
      * @throws IOException
      */
     public void volverMain() throws IOException {
-        EliminarCitaController.volverMain();
+        EliminarCitaController.volverMainStatic();
     }
 
     /**

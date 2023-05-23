@@ -1,6 +1,5 @@
 package com.example.dentista.controller;
 
-import com.example.dentista.App;
 import com.example.dentista.database.CitaTable;
 import com.example.dentista.database.ClienteTable;
 import com.example.dentista.database.DataBaseConnection;
@@ -15,8 +14,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -35,7 +32,7 @@ public class MostrarCitaController implements Initializable {
      */
     @FXML
     public void volverMain() throws IOException {
-        EliminarCitaController.volverMain();
+        EliminarCitaController.volverMainStatic();
     }
     @FXML
     public void filtrarPorDia() {

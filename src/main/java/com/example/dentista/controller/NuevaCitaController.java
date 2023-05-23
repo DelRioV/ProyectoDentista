@@ -16,7 +16,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
-import java.util.Optional;
 
 
 /**
@@ -48,7 +47,7 @@ public class NuevaCitaController implements Initializable {
      */
     @FXML
     public void volverMain() throws IOException {
-        EliminarCitaController.volverMain();
+        EliminarCitaController.volverMainStatic();
     }
     /**
      * Método que se aplica cada vez que ocurre un cambio en el componente "filterField",
@@ -81,7 +80,6 @@ public class NuevaCitaController implements Initializable {
      * @return boolean -> true - si es correcta
      * -> false - si no es correcta
      */
-    @FXML
     public boolean comprobarDuracion() {
         boolean comprobado = false;
         if (Integer.parseInt(horaComboBox.getValue().toString().replace(":", "")) < Integer.parseInt(horafinCBox.getValue().toString().replace(":", ""))) {

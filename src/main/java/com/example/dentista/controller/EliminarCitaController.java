@@ -13,9 +13,6 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -33,9 +30,8 @@ public class EliminarCitaController implements Initializable {
      *
      * @throws IOException
      */
-    @FXML
-    public static void volverMain() throws IOException {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    public static void volverMainStatic() throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText(null);
         alert.setTitle("Confirmación");
         alert.setContentText("¿Seguro que quieres volver al menu principal?");
@@ -43,6 +39,11 @@ public class EliminarCitaController implements Initializable {
         if (action.get() == ButtonType.OK) {
             App.changeScene("windows/mainwindow.fxml", 641, 288);
         }
+    }
+
+    @FXML
+    public void volverMain() throws IOException {
+        volverMainStatic();
     }
 
     /**
@@ -102,12 +103,12 @@ public class EliminarCitaController implements Initializable {
     @FXML
     public void eliminarCita() throws IOException {
         if (citaComboBox.getValue() != null) {
-            if(CitaTable.eliminarCita(clienteComboBox.getValue().toString(), new DataBaseConnection().getConnection(), citaComboBox.getValue().toString().substring(0, citaComboBox.getValue().toString().indexOf("|")))){
+            if (CitaTable.eliminarCita(clienteComboBox.getValue().toString(), new DataBaseConnection().getConnection(), citaComboBox.getValue().toString().substring(0, citaComboBox.getValue().toString().indexOf("|")))) {
                 Alert a = new Alert(Alert.AlertType.INFORMATION);
                 a.setTitle("CONFIRMADO");
                 a.setContentText("Se ha eliminado con éxito la cita");
                 a.show();
-                volverMain();
+                volverMainStatic();
             } else {
                 Alert a = new Alert(Alert.AlertType.ERROR);
                 a.setTitle("ERROR");
