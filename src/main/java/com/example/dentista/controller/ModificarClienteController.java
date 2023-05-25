@@ -99,7 +99,7 @@ public class ModificarClienteController implements Initializable {
      */
     @FXML
     public void modificarCliente() throws IOException {
-        if (!clienteComboBox.getPromptText().equals("- Seleccione un cliente -")) {
+        if (!clienteComboBox.getPromptText().equals("- Seleccione un cliente -") && clienteComboBox.getValue() != null) {
 
             String abd = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
             if (dniField.getText().length() != 9 || abd.indexOf(dniField.getText().substring(8, 9)) == -1 || !dniField.getText().substring(0, 8).matches("[0-9]+")) {

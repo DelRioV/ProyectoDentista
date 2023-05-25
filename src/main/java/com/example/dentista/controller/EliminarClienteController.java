@@ -36,6 +36,7 @@ public class EliminarClienteController implements Initializable {
     public void volverMain() throws IOException {
         EliminarCitaController.volverMainStatic();
     }
+
     /**
      * Método que se aplica cada vez que ocurre un cambio en el componente "filterField",
      * que va rellenando el combo box con los datos recibidos del método BuscarController.filtrarNombre()
@@ -56,14 +57,15 @@ public class EliminarClienteController implements Initializable {
      */
     @FXML
     public void eliminarCliente() throws IOException {
-        if (!clienteComboBox.getPromptText().toString().equals("- Seleccione un cliente -")) {
+        if (!clienteComboBox.getPromptText().toString().equals("- Seleccione un cliente -") && clienteComboBox.getValue() != null) {
             boolean eliminado = ClienteTable.eliminarCliente(new DataBaseConnection().getConnection(), clienteComboBox.getValue().toString());
             if (eliminado) {
                 Alert a = new Alert(Alert.AlertType.INFORMATION);
                 a.setTitle("INFORMACIÓN");
                 a.setContentText("Cliente eliminado con éxito");
                 a.show();
-                App.changeScene("windows/mainwindow.fxml", 641, 288);            }
+                App.changeScene("windows/mainwindow.fxml", 641, 288);
+            }
         } else {
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setTitle("ERROR");

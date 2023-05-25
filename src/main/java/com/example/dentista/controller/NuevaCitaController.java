@@ -123,7 +123,7 @@ public class NuevaCitaController implements Initializable {
      */
     @FXML
     public void guardarCita() throws IOException, ParseException {
-        if (!clienteComboBox.getPromptText().toString().equals("- Seleccione un cliente -") && !horaComboBox.getPromptText().toString().equals("- Hora de la cita -")
+        if (!clienteComboBox.getPromptText().toString().equals("- Seleccione un cliente -") && clienteComboBox.getValue() != null && !horaComboBox.getPromptText().toString().equals("- Hora de la cita -")
                 && !horafinCBox.getPromptText().toString().equals("- Hora de fin -") && !fechaCitaDtPicker.getPromptText().equals("Elija la fecha...")) {
             if (comprobarDisponibilidad()) {
                 if (comprobarDuracion()) {

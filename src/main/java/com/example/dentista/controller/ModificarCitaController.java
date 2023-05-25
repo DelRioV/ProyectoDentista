@@ -132,7 +132,7 @@ public class ModificarCitaController implements Initializable {
      */
     @FXML
     public void modificarCita() throws IOException, ParseException {
-        if (!clienteComboBox.getPromptText().toString().equals("- Seleccione un cliente -") && !citaComboBox.getPromptText().toString().equals("- Seleccione la cita que desea modificar -") && !horaComboBox.getPromptText().toString().equals("- Hora de la cita -") && !fechaCitaDtPicker.getPromptText().equals("Elija la fecha...") && citaComboBox.getValue() != null) {
+        if (!clienteComboBox.getPromptText().toString().equals("- Seleccione un cliente -") && clienteComboBox.getValue() != null && citaComboBox.getValue() != null && !citaComboBox.getPromptText().toString().equals("- Seleccione la cita que desea modificar -") && !horaComboBox.getPromptText().toString().equals("- Hora de la cita -") && !fechaCitaDtPicker.getPromptText().equals("Elija la fecha...") && citaComboBox.getValue() != null) {
             if (comprobarDisponibilidad()) {
                 if (comprobarDuracion()) {
                     Cita cita = new Cita(fechaCitaDtPicker.getValue(), dni,

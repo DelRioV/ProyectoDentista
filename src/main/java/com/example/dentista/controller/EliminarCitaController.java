@@ -102,7 +102,7 @@ public class EliminarCitaController implements Initializable {
 
     @FXML
     public void eliminarCita() throws IOException {
-        if (citaComboBox.getValue() != null) {
+        if (citaComboBox.getValue() != null && clienteComboBox.getValue() != null) {
             if (CitaTable.eliminarCita(clienteComboBox.getValue().toString(), new DataBaseConnection().getConnection(), citaComboBox.getValue().toString().substring(0, citaComboBox.getValue().toString().indexOf("|")))) {
                 Alert a = new Alert(Alert.AlertType.INFORMATION);
                 a.setTitle("CONFIRMADO");
@@ -118,7 +118,7 @@ public class EliminarCitaController implements Initializable {
         } else {
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setTitle("ERROR");
-            a.setContentText("Seleccione una cita para ser eliminada");
+            a.setContentText("Por favor, rellene los campos");
             a.show();
         }
     }
