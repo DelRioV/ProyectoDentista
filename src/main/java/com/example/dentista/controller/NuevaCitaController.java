@@ -2,6 +2,7 @@ package com.example.dentista.controller;
 
 import com.example.dentista.App;
 import com.example.dentista.database.CitaTable;
+import com.example.dentista.database.ClienteTable;
 import com.example.dentista.database.DataBaseConnection;
 import com.example.dentista.model.Cita;
 import com.example.dentista.model.Cliente;
@@ -15,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
@@ -132,6 +134,15 @@ public class NuevaCitaController implements Initializable {
                             descripcionTextArea.getText(), horaComboBox.getValue().toString(),
                             horafinCBox.getValue().toString());
                     if (CitaTable.nuevaCita(cita, new DataBaseConnection().getConnection())) {
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setHeaderText(null);
+                        alert.setTitle("Confirmación");
+                        alert.setContentText("¿Quieres mandar un mensaje al cliente?");
+                        Optional<ButtonType> action = alert.showAndWait();
+                        if (action.get() == ButtonType.OK) {
+                            Cliente cliente = ClienteTable.tomarCliente(new DataBaseConnection().getConnection(), cita.getDniCliente());
+                            WhatsappController.whatsapp(cliente, cita);
+                        }
                         Alert a = new Alert(Alert.AlertType.INFORMATION);
                         a.setTitle("REGISTRADO");
                         a.setContentText("SE HA CONFIRMADO EL REGISTRO DE SU CITA");
