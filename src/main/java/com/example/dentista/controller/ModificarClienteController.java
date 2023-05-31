@@ -109,14 +109,23 @@ public class ModificarClienteController implements Initializable {
                 a.show();
             } else {
                 if (telefonoField.getText().matches("[0-9]+") && telefonoField.getText().length() == 9) {
-                    Cliente cliente = new Cliente(nombreField.getText(), dniField.getText(), telefonoField.getText(), nacimientoDtPicker.getValue().toString());
-                    boolean modificado = ClienteTable.modificarCliente(cliente, new DataBaseConnection().getConnection(), clienteComboBox.getValue().toString());
-                    if (modificado) {
-                        Alert a = new Alert(Alert.AlertType.INFORMATION);
-                        a.setTitle("INFORMACIÓN");
-                        a.setContentText("Cliente modificado con éxito");
+                    if (!nombreField.getText().equals("")) {
+
+                        Cliente cliente = new Cliente(nombreField.getText(), dniField.getText(), telefonoField.getText(), nacimientoDtPicker.getValue().toString());
+                        boolean modificado = ClienteTable.modificarCliente(cliente, new DataBaseConnection().getConnection(), clienteComboBox.getValue().toString());
+                        if (modificado) {
+                            Alert a = new Alert(Alert.AlertType.INFORMATION);
+                            a.setTitle("INFORMACIÓN");
+                            a.setContentText("Cliente modificado con éxito");
+                            a.show();
+                            App.changeScene("windows/mainwindow.fxml", 641, 288);
+                        }
+                    } else {
+                        Alert a = new Alert(Alert.AlertType.ERROR);
+                        a.setTitle("ERROR");
+                        a.setHeaderText(null);
+                        a.setContentText("Relleno todos los campos");
                         a.show();
-                        App.changeScene("windows/mainwindow.fxml", 641, 288);
                     }
                 } else {
                     Alert a = new Alert(Alert.AlertType.ERROR);

@@ -37,6 +37,7 @@ public class NuevoClienteController {
     public void volverMain() throws IOException {
         EliminarCitaController.volverMainStatic();
     }
+
     /**
      * Método de comprobación de selección de fecha de nacimiento
      */
@@ -61,19 +62,26 @@ public class NuevoClienteController {
                 a.show();
             } else {
                 if (telefonoField.getText().matches("[0-9]+") && telefonoField.getText().length() == 9) {
-                    Cliente cliente = new Cliente(nombreField.getText(), dniField.getText(), telefonoField.getText(), nacimientoDtPicker.getValue().toString());
-                    boolean registrado = ClienteTable.nuevoCliente(cliente, new DataBaseConnection().getConnection());
-                    if (registrado) {
-                        Alert a = new Alert(Alert.AlertType.INFORMATION);
-                        a.setTitle("INFORMACIÓN");
-                        a.setContentText("Cliente registrado con éxito");
-                        a.show();
-                        App.changeScene("windows/mainwindow.fxml", 641, 288);
+                    if (!nombreField.getText().equals("")) {
+                        Cliente cliente = new Cliente(nombreField.getText(), dniField.getText(), telefonoField.getText(), nacimientoDtPicker.getValue().toString());
+                        boolean registrado = ClienteTable.nuevoCliente(cliente, new DataBaseConnection().getConnection());
+                        if (registrado) {
+                            Alert a = new Alert(Alert.AlertType.INFORMATION);
+                            a.setTitle("INFORMACIÓN");
+                            a.setContentText("Cliente registrado con éxito");
+                            a.show();
+                            App.changeScene("windows/mainwindow.fxml", 641, 288);
+                        } else {
+                            Alert a = new Alert(Alert.AlertType.ERROR);
+                            a.setTitle("ERROR");
+                            a.setHeaderText(null);
+                            a.setContentText("No se pueden agregar dos clientes con el mismo nombre");
+                            a.show();
+                        }
                     } else {
                         Alert a = new Alert(Alert.AlertType.ERROR);
                         a.setTitle("ERROR");
-                        a.setHeaderText(null);
-                        a.setContentText("No se pueden agregar dos clientes con el mismo nombre");
+                        a.setContentText("Rellene los campos");
                         a.show();
                     }
                 } else {
