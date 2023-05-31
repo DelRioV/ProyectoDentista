@@ -108,7 +108,7 @@ public class EliminarCitaController implements Initializable {
                 a.setTitle("CONFIRMADO");
                 a.setContentText("Se ha eliminado con éxito la cita");
                 a.show();
-                volverMainStatic();
+                App.changeScene("windows/mainwindow.fxml", 641, 288);
             } else {
                 Alert a = new Alert(Alert.AlertType.ERROR);
                 a.setTitle("ERROR");
