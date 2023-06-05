@@ -10,8 +10,20 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+/**
+ * Clase que controla las acciones para poder mandar un mensaje a través de la URL de whatsapp
+ *
+ * @author: Pablo Salvadro Del Río Vergara
+ * @version: 25/05/2023
+ */
 public class WhatsappController {
-
+    /**
+     * Método que permite mandar un mensaje a través de whatsapp
+     *
+     * @param cliente - Cliente -> El cliente al que se le va a mandar un mensaje
+     * @param cita    - Cita -> La cita que se va a enviar
+     * @throws MalformedURLException
+     */
     public static void whatsapp(Cliente cliente, Cita cita) throws MalformedURLException {
         Locale español = new Locale("es", "ES");
         URL url = new URL("https://wa.me/" + "+34" + cliente.getTelefono() + "/?" + "text=¡Buenas!%20Le%20recordamos%20que%20el%20día%20" +

@@ -1,5 +1,11 @@
 package com.example.dentista.model;
 
+/**
+ * Clase que permite almacenar los datos de los clientes
+ *
+ * @author: Pablo Salvadro Del Río Vergara
+ * @version: 15/05/2023
+ */
 public class Cliente {
 
     private String nombre;
@@ -7,6 +13,14 @@ public class Cliente {
     private String telefono;
     private String fechaNacimiento;
 
+    /**
+     * Constructor
+     *
+     * @param nombre
+     * @param dni
+     * @param telefono
+     * @param fechaNacimiento
+     */
     public Cliente(String nombre, String dni, String telefono, String fechaNacimiento) {
         this.setNombre(nombre);
         this.setDni(dni);

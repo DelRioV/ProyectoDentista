@@ -19,6 +19,12 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * Clase que controla las acciones de la ventana mostrarcitawindow.fxml
+ *
+ * @author: Pablo Salvador Del Río Vergara
+ * @version: 25/05/2023
+ */
 public class MostrarCitaController implements Initializable {
 
     @FXML
@@ -35,6 +41,10 @@ public class MostrarCitaController implements Initializable {
     public void volverMain() throws IOException {
         EliminarCitaController.volverMainStatic();
     }
+
+    /**
+     * Método que filtra por día las citas (sin pasarle una fecha)
+     */
     @FXML
     public void filtrarPorDia() {
         tomarDia();
@@ -45,6 +55,9 @@ public class MostrarCitaController implements Initializable {
         }
     }
 
+    /**
+     * Método que filtra por día las citas (pasandole una fecha)
+     */
     @FXML
     public void filtrarPorDia(String fecha) {
         tomarDia();
@@ -54,13 +67,25 @@ public class MostrarCitaController implements Initializable {
         }
     }
 
+    /**
+     * Método que recarga la ventana
+     *
+     * @throws IOException
+     */
     @FXML
     public void recargar() throws IOException {
         App.changeScene("windows/mostrarcitawindow.fxml", 600, 338);
     }
+
+    /**
+     * Método que permite mandar un mensaje predeterminado por whatsapp
+     *
+     * @throws MalformedURLException
+     * @throws UnsupportedEncodingException
+     */
     @FXML
     public void mandarMensaje() throws MalformedURLException, UnsupportedEncodingException {
-        if(tablaCitasTableView.getSelectionModel().getSelectedItem() != null) {
+        if (tablaCitasTableView.getSelectionModel().getSelectedItem() != null) {
             Cita cita = (Cita) tablaCitasTableView.getSelectionModel().getSelectedItem();
             Cliente cliente = ClienteTable.tomarCliente(new DataBaseConnection().getConnection(), cita.getDniCliente());
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -80,6 +105,9 @@ public class MostrarCitaController implements Initializable {
         }
     }
 
+    /**
+     * Método que comprueba si se ha escogido el día o no
+     */
     public void tomarDia() {
         if (diaDtPicker.getValue() != null) {
             diaDtPicker.setPromptText(diaDtPicker.getValue().toString());

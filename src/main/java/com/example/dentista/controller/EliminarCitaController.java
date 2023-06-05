@@ -17,6 +17,12 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * Clase que controla las acciones de la ventana eliminarcitawindow.fxml
+ *
+ * @author: Pablo Salvadro Del Río Vergara
+ * @version: 25/05/2023
+ */
 public class EliminarCitaController implements Initializable {
     @FXML
     private ComboBox clienteComboBox;
@@ -41,6 +47,11 @@ public class EliminarCitaController implements Initializable {
         }
     }
 
+    /**
+     * Método que permite la vuelta a la ventana principal
+     *
+     * @throws IOException
+     */
     @FXML
     public void volverMain() throws IOException {
         volverMainStatic();
@@ -93,6 +104,9 @@ public class EliminarCitaController implements Initializable {
         }
     }
 
+    /**
+     * Método que controla la selección de citas
+     */
     @FXML
     public void seleccionarCita() {
         if (citaComboBox.getValue() != null) {
@@ -100,6 +114,11 @@ public class EliminarCitaController implements Initializable {
         }
     }
 
+    /**
+     * Método que se encarga de eliminar la cita seleccionada
+     *
+     * @throws IOException
+     */
     @FXML
     public void eliminarCita() throws IOException {
         if (citaComboBox.getValue() != null && clienteComboBox.getValue() != null) {
@@ -123,6 +142,12 @@ public class EliminarCitaController implements Initializable {
         }
     }
 
+    /**
+     * Método que se ejecuta cuando carga la ventana
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         filtrarCliente();

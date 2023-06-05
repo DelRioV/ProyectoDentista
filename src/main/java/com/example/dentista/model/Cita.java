@@ -2,6 +2,12 @@ package com.example.dentista.model;
 
 import java.time.LocalDate;
 
+/**
+ * Clase que permite almacenar los datos de las citas
+ *
+ * @author: Pablo Salvadro Del Río Vergara
+ * @version: 15/05/2023
+ */
 public class Cita {
     private LocalDate fechaCita;
     private String dniCliente;
@@ -9,6 +15,15 @@ public class Cita {
     private String horaInicio;
     private String horaFin;
 
+    /**
+     * Constructor
+     *
+     * @param fechaCita
+     * @param dniCliente
+     * @param descripcion
+     * @param horaInicio
+     * @param horaFin
+     */
     public Cita(LocalDate fechaCita, String dniCliente, String descripcion, String horaInicio, String horaFin) {
         this.setFechaCita(fechaCita);
         this.setDniCliente(dniCliente);
